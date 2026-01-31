@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="description" content="Professional pediatric dose calculator for healthcare providers. Calculate medication doses based on age and weight.">
+<meta name="keywords" content="pediatric, dose, calculator, medication, healthcare, medical">
+<meta name="author" content="Healthcare Professional">
+
+<!-- PWA Primary Color -->
+<meta name="theme-color" content="#0b1220">
+<meta name="msapplication-TileColor" content="#0b1220">
+
+<!-- iOS Meta Tags -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Dose Calc">
+<meta name="format-detection" content="telephone=no">
+
+<!-- Web App Manifest -->
+<link rel="manifest" href="manifest.json">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%234da3ff' width='100' height='100' rx='20'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='white'%3E💊%3C/text%3E%3C/svg%3E">
+
+<!-- Apple Touch Icons -->
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%234da3ff' width='180' height='180' rx='40'/%3E%3Ctext x='90' y='130' font-size='100' text-anchor='middle' fill='white'%3E💊%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" sizes="152x152" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 152 152'%3E%3Crect fill='%234da3ff' width='152' height='152' rx='34'/%3E%3Ctext x='76' y='110' font-size='85' text-anchor='middle' fill='white'%3E💊%3C/text%3E%3C/svg%3E">
+
+<title>Pediatric Dose Calculator</title>
+
+<style>
+:root {
+  --bg: #0b1220;
+  --card: #101b33;
+  --muted: #9fb0d0;
+  --text: #e8eefc;
+  --accent: #4da3ff;
+  --good: #16a34a;
+  --warn: #f59e0b;
+  --bad: #ef4444;
+  --line: #213055;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  overflow-x: hidden;
+}
+
+header {
+  padding: 20px 16px 16px;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-left {
+  flex: 1;
+}
+
+h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.install-banner {
+  background: linear-gradient(135deg, rgba(77, 163, 255, 0.15), rgba(77, 163, 255, 0.05));
+  border: 1px solid rgba(77, 163, 255, 0.3);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin: 12px 16px;
+  display: none;
+  align-items: center;
+  gap: 12px;
+  animation: slideDown 0.3s ease;
+}
+
+.install-banner.show {
+  display: flex;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.install-banner-content {
+  flex: 1;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.install-banner-content strong {
+  display: block;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.install-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.install-btn:active {
+  transform: scale(0.95);
+}
+
+.close-banner {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+}
+
+.wrap {
+  padding: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: calc(40px + env(safe-area-inset-bottom));
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px;
+  margin: 12px 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.field {
+  margin-bottom: 0;
+}
+
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #0c1530;
+  color: var(--text);
+  font-size: 17px;
+  transition: all 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239fb0d0' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 40px;
+}
+
+.field input:focus,
+.field select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(77, 163, 255, 0.15);
+}
+
+.pill {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  background: rgba(77, 163, 255, 0.12);
+  border: 1px solid rgba(77, 163, 255, 0.25);
+  color: var(--accent);
+}
+
+.warning-box {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 12px 0;
+  line-height: 1.6;
+}
+
+.warning-box strong {
+  color: #fde68a;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.summary-box {
+  background: rgba(77, 163, 255, 0.1);
+  border: 1px solid rgba(77, 163, 255, 0.25);
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-top: 12px;
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  background: rgba(77, 163, 255, 0.15);
+  border: 1px solid rgba(77, 163, 255, 0.35);
+  color: #cfe6ff;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.btn:active {
+  transform: scale(0.97);
+  background: rgba(77, 163, 255, 0.25);
+}
+
+.btn-secondary {
+  background: rgba(159, 176, 208, 0.12);
+  border: 1px solid rgba(159, 176, 208, 0.25);
+  color: #e8eefc;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.search {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #0c1530;
+  color: var(--text);
+  font-size: 17px;
+  -webkit-appearance: none;
+}
+
+.search::placeholder {
+  color: #596b8d;
+}
+
+details {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #0c1530;
+  margin: 12px 0;
+  overflow: hidden;
+}
+
+summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  -webkit-user-select: none;
+  user-select: none;
+  min-height: 60px;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::after {
+  content: '▼';
+  font-size: 12px;
+  color: var(--muted);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.cat-title {
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.cat-sub {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.cat-meta {
+  color: var(--muted);
+  font-size: 13px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cat-body {
+  padding: 0 12px 16px;
+}
+
+.med-card {
+  background: #0b1220;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  margin: 12px 0;
+}
+
+.med-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.med-name {
+  font-size: 17px;
+  font-weight: 900;
+  flex: 1;
+  line-height: 1.3;
+}
+
+.badge {
+  font-size: 11px;
+  padding: 5px 11px;
+  border-radius: 12px;
+  display: inline-block;
+  font-weight: 800;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.b-good {
+  background: rgba(22, 163, 74, 0.18);
+  color: #86efac;
+  border: 1px solid rgba(22, 163, 74, 0.4);
+}
+
+.b-warn {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fde68a;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.b-bad {
+  background: rgba(239, 68, 68, 0.18);
+  color: #fecaca;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.dose-display {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--accent);
+  margin: 10px 0;
+  line-height: 1.2;
+}
+
+.freq {
+  font-size: 14px;
+  color: var(--text);
+  background: rgba(77, 163, 255, 0.08);
+  padding: 8px 12px;
+  border-radius: 8px;
+  display: inline-block;
+  margin: 8px 0;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+.override-input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #0c1530;
+  color: var(--text);
+  font-size: 17px;
+  margin-top: 10px;
+  -webkit-appearance: none;
+}
+
+.override-input:focus {
+  outline: none;
+  border-color: var(--warn);
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.15);
+}
+
+.small {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+footer {
+  padding: 20px 16px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+  border-top: 1px solid var(--line);
+  margin-top: 24px;
+}
+
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.status-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-left: 8px;
+}
+
+.status-online {
+  background: var(--good);
+  box-shadow: 0 0 8px rgba(22, 163, 74, 0.5);
+}
+
+.status-offline {
+  background: var(--warn);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  h1 {
+    font-size: 20px;
+  }
+  
+  .dose-display {
+    font-size: 22px;
+  }
+  
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .toolbar .row {
+    width: 100%;
+  }
+  
+  .btn {
+    flex: 1;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: var(--bg);
+  }
+}
+</style>
+</head>
+<body>
+
+<div id="installBanner" class="install-banner">
+  <div class="install-banner-content">
+    <strong>📲 Install App</strong>
+    Add to your home screen for offline access and app-like experience
+  </div>
+  <button id="installBtn" class="install-btn">Install</button>
+  <button id="closeBanner" class="close-banner">×</button>
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="header-left">
+      <h1>🏥 Pediatric Dose Calculator</h1>
+      <p class="subtitle">
+        Professional dosing reference
+        <span id="statusIndicator"></span>
+      </p>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  
+  <div class="warning-box">
+    <strong>⚠️ For Healthcare Professionals Only</strong>
+    This is a reference tool. Always verify doses against your local formulary, check contraindications, renal/hepatic function, allergies, and maximum daily doses before prescribing.
+  </div>
+
+  <div class="card">
+    <span class="pill">Patient Information</span>
+    
+    <div class="grid" style="margin-top: 16px;">
+      <div class="field">
+        <label>Age (years)</label>
+        <input id="ageYears" type="number" min="0" max="18" step="1" value="4" inputmode="numeric">
+      </div>
+      <div class="field">
+        <label>Additional months</label>
+        <input id="ageMonths" type="number" min="0" max="11" step="1" value="0" inputmode="numeric">
+      </div>
+    </div>
+
+    <div class="field" style="margin-top: 12px;">
+      <label>Weight (kg)</label>
+      <input id="weight" type="number" min="0" max="150" step="0.1" value="20" inputmode="decimal">
+    </div>
+
+    <div class="summary-box" id="ageSummary">—</div>
+
+    <div class="grid" style="margin-top: 12px;">
+      <div class="field">
+        <label>Filter</label>
+        <select id="viewMode">
+          <option value="all">All medications</option>
+          <option value="common">Common only</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Display units</label>
+        <select id="unitPref">
+          <option value="auto">Auto (mg + mL)</option>
+          <option value="mg">mg only</option>
+          <option value="ml">mL when available</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="toolbar">
+      <span class="pill">Medications</span>
+      <div class="row">
+        <button class="btn btn-secondary" id="expandAllBtn">Expand</button>
+        <button class="btn btn-secondary" id="collapseAllBtn">Collapse</button>
+        <button class="btn" id="resetBtn">Reset</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Search medications</label>
+      <input class="search" id="searchBox" type="text" placeholder="e.g., paracetamol, amoxicillin...">
+    </div>
+
+    <div id="categories" style="margin-top: 16px;"></div>
+  </div>
+
+  <footer>
+    <strong>Progressive Web App</strong><br>
+    Works offline • Installable • Auto-updates<br>
+    <br>
+    Always consult current drug references and use clinical judgment
+  </footer>
+  
+</div>
+
+<script src="app.js"></script>
+<script>
+// Register Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js')
+      .then(reg => {
+        console.log('✅ Service Worker registered');
+        updateOnlineStatus();
+      })
+      .catch(err => console.log('❌ Service Worker registration failed:', err));
+  });
+}
+
+// Update online/offline status
+function updateOnlineStatus() {
+  const indicator = document.getElementById('statusIndicator');
+  if (navigator.onLine) {
+    indicator.innerHTML = '<span class="status-indicator status-online" title="Online"></span>';
+  } else {
+    indicator.innerHTML = '<span class="status-indicator status-offline" title="Offline"></span>';
+  }
+}
+
+window.addEventListener('online', updateOnlineStatus);
+window.addEventListener('offline', updateOnlineStatus);
+updateOnlineStatus();
+
+// PWA Install Prompt
+let deferredPrompt;
+const installBanner = document.getElementById('installBanner');
+const installBtn = document.getElementById('installBtn');
+const closeBanner = document.getElementById('closeBanner');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  
+  // Don't show if already dismissed
+  if (!localStorage.getItem('installBannerDismissed')) {
+    installBanner.classList.add('show');
+  }
+});
+
+installBtn.addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  
+  if (outcome === 'accepted') {
+    console.log('✅ App installed');
+  }
+  
+  deferredPrompt = null;
+  installBanner.classList.remove('show');
+});
+
+closeBanner.addEventListener('click', () => {
+  installBanner.classList.remove('show');
+  localStorage.setItem('installBannerDismissed', 'true');
+});
+
+// Check if already installed
+window.addEventListener('appinstalled', () => {
+  console.log('✅ App installed successfully');
+  installBanner.classList.remove('show');
+});
+</script>
+
+</body>
+</html>
