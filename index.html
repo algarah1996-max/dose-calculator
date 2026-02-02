@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#0a0f1e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>PHC Pediatric Dose</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#0a0f1e;color:#e8f0ff;min-height:100vh}
+header{position:sticky;top:0;z-index:100;background:rgba(20,29,53,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(77,163,255,.15);padding:16px 20px}
+h1{font-size:20px;font-weight:900;background:linear-gradient(135deg,#4da3ff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{margin-top:6px;font-size:12px;color:#6b7a9a}
+.wrap{padding:16px 20px 100px;max-width:800px;margin:0 auto}
+.card{background:rgba(20,29,53,.7);border:1px solid #213055;border-radius:16px;padding:20px;margin:16px 0}
+.warn-box{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:12px;padding:14px;margin:12px 0;font-size:13px;display:flex;gap:12px}
+.alert-box{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:14px;margin:12px 0;font-size:13px;display:flex;gap:12px}
+.info-box{background:rgba(77,163,255,.1);border:1px solid rgba(77,163,255,.3);border-radius:12px;padding:14px;margin:12px 0;font-size:13px}
+.growth-box{background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.3);border-radius:12px;padding:14px;margin-top:12px;font-size:13px;line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.fld{margin-bottom:12px}
+.fld label{display:block;font-size:11px;font-weight:700;color:#6b7a9a;margin-bottom:8px;text-transform:uppercase}
+.fld input,.fld select{width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid #213055;background:#0f1629;color:#e8f0ff;font-size:15px;font-weight:600}
+.fld input:focus,.fld select:focus{outline:none;border-color:#4da3ff}
+.fld select.male{border-color:#4da3ff;box-shadow:0 0 0 3px rgba(77,163,255,.2)}
+.fld select.female{border-color:#ff69b4;box-shadow:0 0 0 3px rgba(255,105,180,.2)}
+.sum{background:linear-gradient(135deg,rgba(77,163,255,.15),rgba(168,85,247,.1));border:1.5px solid rgba(77,163,255,.3);border-radius:12px;padding:14px 18px;font-size:14px;font-weight:700;margin-top:16px}
+.sum.male{background:linear-gradient(135deg,rgba(77,163,255,.2),rgba(96,165,250,.1));border-color:rgba(77,163,255,.4)}
+.sum.female{background:linear-gradient(135deg,rgba(255,105,180,.2),rgba(251,113,219,.1));border-color:rgba(255,105,180,.4)}
+.search{width:100%;padding:14px 20px;border-radius:14px;border:1.5px solid #213055;background:#0f1629;color:#e8f0ff;font-size:15px;margin-bottom:16px}
+.search:focus{outline:none;border-color:#4da3ff}
+.btn{background:rgba(77,163,255,.2);border:1.5px solid rgba(77,163,255,.4);color:#e3f2ff;padding:10px 18px;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer}
+.btn:hover{background:rgba(77,163,255,.3)}
+.btn-sm{padding:8px 14px;font-size:11px}
+.acts{display:flex;gap:8px;justify-content:flex-end}
+.cat{background:#141d35;border:1.5px solid #213055;border-radius:16px;margin:16px 0;overflow:hidden}
+.cat-hdr{padding:18px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,rgba(77,163,255,.08),rgba(168,85,247,.05))}
+.cat-hdr:hover{background:linear-gradient(135deg,rgba(77,163,255,.12),rgba(168,85,247,.08))}
+.cat-hdr.exp{background:linear-gradient(135deg,rgba(77,163,255,.15),rgba(168,85,247,.1));border-bottom:1px solid #213055}
+.cat-ttl{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:800}
+.cat-ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(77,163,255,.2);border:1px solid rgba(77,163,255,.3)}
+.cat-cnt{font-size:11px;padding:4px 10px;border-radius:12px;background:rgba(77,163,255,.2);color:#e3f2ff;font-weight:800}
+.cat-arr{font-size:20px;transition:transform .3s;color:#9fb0d0}
+.cat-hdr.exp .cat-arr{transform:rotate(180deg)}
+.cat-body{max-height:0;overflow:hidden;transition:max-height .4s}
+.cat-body.exp{max-height:50000px}
+.med{background:linear-gradient(135deg,#1a2442,#141d35);border:1.5px solid #213055;border-radius:14px;padding:16px;margin:12px;cursor:pointer;transition:all .2s}
+.med:hover{border-color:rgba(77,163,255,.4);transform:translateY(-2px)}
+.med.exp{cursor:default;border-color:rgba(77,163,255,.5)}
+.med-c{display:block}.med-e{display:none}
+.med.exp .med-c{display:none}.med.exp .med-e{display:block}
+.med-hdr{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.med-nm{font-size:15px;font-weight:900;flex:1}
+.med-nmf{font-size:17px;font-weight:900;margin-bottom:12px}
+.fav{font-size:20px;cursor:pointer}
+.badge{font-size:10px;padding:5px 10px;border-radius:10px;font-weight:900;text-transform:uppercase;white-space:nowrap}
+.b-ok{background:rgba(22,163,74,.25);color:#dcfce7;border:1px solid rgba(22,163,74,.5)}
+.b-warn{background:rgba(245,158,11,.25);color:#fef3c7;border:1px solid rgba(245,158,11,.5)}
+.b-bad{background:rgba(239,68,68,.25);color:#fee2e2;border:1px solid rgba(239,68,68,.5)}
+.b-was{background:rgba(16,185,129,.25);color:#d1fae5;border:1px solid rgba(16,185,129,.5);margin-left:4px}
+.dose-c{font-size:16px;font-weight:900;color:#4da3ff;margin:8px 0;line-height:1.4}
+.dose-e{font-size:18px;font-weight:900;color:#4da3ff;margin:12px 0;padding:12px;border-radius:12px;background:rgba(77,163,255,.08);border:1px solid rgba(77,163,255,.2);line-height:1.5}
+.ml-c{font-size:13px;color:#e3f2ff;font-weight:700;margin:6px 0}
+.ml-e{font-size:15px;color:#e3f2ff;background:rgba(77,163,255,.2);padding:10px 14px;border-radius:10px;display:inline-block;margin:8px 0;font-weight:800}
+.freq-c{font-size:11px;color:#6b7a9a;margin-top:6px}
+.freq-e{font-size:12px;color:#9fb0d0;background:rgba(77,163,255,.1);padding:6px 12px;border-radius:8px;display:inline-block;margin:8px 0}
+.hint{font-size:11px;color:#6b7a9a;text-align:center;margin-top:10px;padding:8px;border-top:1px solid #213055}
+.note{color:#6b7a9a;font-size:12px;line-height:1.6;margin-top:10px;padding:12px;background:rgba(0,0,0,.3);border-radius:10px;border:1px solid #213055}
+.note strong{color:#e8f0ff}
+.det{margin-top:10px;background:rgba(0,0,0,.25);border-radius:10px;border:1px solid #213055;overflow:hidden}
+.det-h{cursor:pointer;font-weight:700;font-size:12px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center}
+.det-h:hover{background:rgba(77,163,255,.1)}
+.det-h.open{background:rgba(77,163,255,.15);color:#e3f2ff}
+.det-b{max-height:0;overflow:hidden;transition:max-height .3s}
+.det-b.open{max-height:1000px}
+.det-in{padding:12px 14px}
+.det-ico{transition:transform .3s}
+.det-h.open .det-ico{transform:rotate(180deg)}
+.coll{width:100%;margin-top:16px}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);z-index:1000;align-items:center;justify-content:center}
+.modal.active{display:flex}
+.modal-c{background:#141d35;border:1.5px solid #213055;border-radius:20px;padding:24px;max-width:500px;width:90%;max-height:80vh;overflow-y:auto}
+.modal-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #213055}
+.modal-x{cursor:pointer;font-size:28px;color:#6b7a9a}
+.hist{background:rgba(77,163,255,.08);border:1px solid #213055;border-radius:12px;padding:14px;margin:10px 0;font-size:12px}
+footer{padding:24px;color:#6b7a9a;font-size:11px;text-align:center;border-top:1px solid #213055;margin-top:32px}
+@media(max-width:640px){.grid,.grid3{grid-template-columns:1fr}h1{font-size:18px}.med{margin:10px}}
+</style>
+</head>
+<body>
+<header>
+<h1>🏥 PHC Pediatric Dose & Formulary</h1>
+<p class="sub">Saudi Growth Charts • Wasfaty • Offline PWA</p>
+</header>
+<div class="wrap">
+<div class="warn-box">
+<span style="font-size:24px">⚠️</span>
+<div><strong style="color:#fef3c7">Healthcare Professionals Only</strong><br>Verify against local protocols. Check interactions and max doses.</div>
+</div>
+<div id="gAlert"></div>
+<div class="card">
+<div class="grid3">
+<div class="fld"><label>Age (years)</label><input id="ageY" type="number" min="0" max="19" value="6" inputmode="numeric"></div>
+<div class="fld"><label>+ Months</label><input id="ageM" type="number" min="0" max="11" value="0" inputmode="numeric"></div>
+<div class="fld"><label>Sex</label><select id="sex"><option value="">Select</option><option value="male">👦 Male</option><option value="female">👧 Female</option></select></div>
+</div>
+<div class="info-box" style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px">
+  <div>
+    <b>Saudi LMS tables</b><br>
+    <span style="color:#8aa0c7;font-size:12px">Loads official Saudi LMS parameters (0–60 months + 5–18 years) to calculate accurate percentiles.</span>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+    <button id="lmsBtn" class="btn" style="padding:10px 12px;border-radius:10px">Load LMS</button>
+    <span id="lmsStatus" style="font-size:11px;color:#8aa0c7">Not loaded</span>
+  </div>
+</div>
+<div class="grid" style="margin-top:12px">
+<div class="fld"><label>Weight (kg) *</label><input id="wt" type="number" min="0" max="150" step="0.1" value="20" inputmode="decimal"></div>
+<div class="fld"><label>Height (cm)</label><input id="ht" type="number" min="0" max="200" step="0.1" value="115" inputmode="decimal" placeholder="For BMI"></div>
+</div>
+<div class="sum" id="sumBox">—</div>
+<div id="gSum"></div>
+</div>
+<div class="card">
+<input class="search" id="srcBox" placeholder="Search medication or indication..." autocomplete="off">
+<div class="acts">
+<button class="btn btn-sm" id="favBtn">⭐ Favorites</button>
+<button class="btn btn-sm" id="histBtn">📋 History</button>
+</div>
+</div>
+<div id="catBox"></div>
+<footer><strong>Saudi Edition by Aljarrah</strong><br>Saudi Growth Charts (El Mouzan 2005) • Lexicomp • BNFC • Wasfaty</footer>
+</div>
+<div class="modal" id="histModal">
+<div class="modal-c">
+<div class="modal-h"><h2 style="font-size:18px;font-weight:800">📋 History</h2><span class="modal-x" id="histX">×</span></div>
+<div id="histList"></div>
+<button class="btn" style="width:100%;margin-top:16px" id="histClr">Clear All</button>
+</div>
+</div>
+<div class="modal" id="favModal">
+<div class="modal-c">
+<div class="modal-h"><h2 style="font-size:18px;font-weight:800">⭐ Favorites</h2><span class="modal-x" id="favX">×</span></div>
+<div id="favList"></div>
+</div>
+</div>
+<script>
+const SG={male:{wt:{0:{p3:2.5,p50:3.5,p97:4.5},6:{p3:6,p50:7.8,p97:9.8},12:{p3:7.8,p50:10.3,p97:12.9},24:{p3:10,p50:13.1,p97:16.5},36:{p3:11.5,p50:15.2,p97:19.2},48:{p3:13,p50:17.2,p97:21.8},60:{p3:14.5,p50:19.2,p97:24.4},72:{p3:16,p50:21.8,p97:28.2},96:{p3:19.2,p50:27.4,p97:36.6},120:{p3:23,p50:34.2,p97:47.5},144:{p3:28.5,p50:44.5,p97:64.5}},ht:{0:{p3:46,p50:50,p97:54},12:{p3:71,p50:79,p97:87},24:{p3:82,p50:93,p97:103},36:{p3:89,p50:101,p97:112},48:{p3:96,p50:109,p97:120},60:{p3:102,p50:115,p97:127},72:{p3:108,p50:121,p97:133},96:{p3:118,p50:133,p97:147},120:{p3:129,p50:147,p97:163},144:{p3:143,p50:164,p97:181}}},female:{wt:{0:{p3:2.4,p50:3.4,p97:4.4},6:{p3:5.5,p50:7.3,p97:9.3},12:{p3:7.3,p50:9.7,p97:12.3},24:{p3:9.5,p50:12.6,p97:16},36:{p3:11,p50:14.6,p97:18.6},48:{p3:12.5,p50:16.5,p97:21.1},60:{p3:14,p50:18.4,p97:23.6},72:{p3:15.5,p50:20.9,p97:27.2},96:{p3:18.7,p50:26.6,p97:35.8},120:{p3:22.8,p50:34.2,p97:48},144:{p3:29,p50:46,p97:64.8}},ht:{0:{p3:45,p50:49,p97:53},12:{p3:70,p50:78,p97:86},24:{p3:81,p50:92,p97:102},36:{p3:88,p50:100,p97:111},48:{p3:95,p50:108,p97:119},60:{p3:101,p50:114,p97:126},72:{p3:107,p50:120,p97:132},96:{p3:118,p50:133,p97:147},120:{p3:131,p50:149,p97:165},144:{p3:146,p50:164,p97:177}}}};
+// --- Saudi Growth (Range) helpers ---
+// Note: The built-in SG tables contain only p3/p50/p97 anchor points.
+// We derive intermediate percentile cut-points (p5,p10,p25,p75,p90,p95) assuming an approximately normal distribution
+// around the median. This is an approximation for RANGE display, not LMS-exact percentiles.
+
+const PCTS=[3,5,10,25,50,75,90,95,97];
+
+// Acklam inverse-normal approximation (good accuracy for our use)
+function invNorm(p){
+  if(p<=0||p>=1) return NaN;
+  const a=[-3.969683028665376e+01,  2.209460984245205e+02, -2.759285104469687e+02,
+            1.383577518672690e+02, -3.066479806614716e+01,  2.506628277459239e+00];
+  const b=[-5.447609879822406e+01,  1.615858368580409e+02, -1.556989798598866e+02,
+            6.680131188771972e+01, -1.328068155288572e+01];
+  const c=[-7.784894002430293e-03, -3.223964580411365e-01, -2.400758277161838e+00,
+           -2.549732539343734e+00,  4.374664141464968e+00,  2.938163982698783e+00];
+  const d=[ 7.784695709041462e-03,  3.224671290700398e-01,  2.445134137142996e+00,
+            3.754408661907416e+00];
+  const plow=0.02425, phigh=1-plow;
+  let q,r;
+  if(p<plow){
+    q=Math.sqrt(-2*Math.log(p));
+    return (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) /
+           ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+  }
+  if(p>phigh){
+    q=Math.sqrt(-2*Math.log(1-p));
+    return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) /
+            ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+  }
+  q=p-0.5;
+  r=q*q;
+  return (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q /
+         (((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);
+}
+
+function lerp(x0,x1,t){ return x0 + (x1-x0)*t; }
+
+// interpolate p3/p50/p97 by age (months)
+function interpPD(am, table){
+  const ages = Object.keys(table).map(Number).sort((a,b)=>a-b);
+  if(am<=ages[0]) return table[ages[0]];
+  if(am>=ages[ages.length-1]) return table[ages[ages.length-1]];
+  for(let i=0;i<ages.length-1;i++){
+    const a0=ages[i], a1=ages[i+1];
+    if(am>=a0 && am<=a1){
+      const t=(am-a0)/(a1-a0);
+      const d0=table[a0], d1=table[a1];
+      return {
+        p3:  lerp(d0.p3,  d1.p3,  t),
+        p50: lerp(d0.p50, d1.p50, t),
+        p97: lerp(d0.p97, d1.p97, t)
+      };
+    }
+  }
+  return null;
+}
+
+// build derived cutpoints for the 9 curve labels
+function cutpoints(pd){
+  if(!pd) return null;
+  const z97 = invNorm(0.97); // ~ +1.88079
+  const sd  = (pd.p97 - pd.p3) / (2*z97);
+  const mu  = pd.p50;
+  const cp = {};
+  for(const p of PCTS){
+    const z = invNorm(p/100);
+    cp[p] = mu + z*sd;
+  }
+  return cp;
+}
+
+// Convert a value to a percentile RANGE label using the derived cutpoints
+function toRangeLabel(x, cp){
+  if(!cp || x==null || isNaN(x)) return null;
+  if(x < cp[3]) return "<3";
+  if(x >= cp[97]) return ">97";
+  // buckets
+  const b=[[3,5],[5,10],[10,25],[25,50],[50,75],[75,90],[90,95],[95,97]];
+  for(const [lo,hi] of b){
+    if(x >= cp[lo] && x < cp[hi]) return `${lo}–${hi}`;
+  }
+  return "50–75"; // fallback (shouldn’t happen)
+}
+
+function chkG(am,w,h,s){
+  if(!s || !w) return null;
+  const d=SG[s]; if(!d) return null;
+  const r={wt:null,ht:null,bmi:null,alerts:[]};
+
+  // Weight-for-age range
+  const wd = interpPD(am, d.wt);
+  const wcp = cutpoints(wd);
+  if(wcp){
+    const pr = toRangeLabel(w, wcp);
+    r.wt = {v:w, r:pr};
+    if(pr==="&lt;3" || pr==="<3") r.alerts.push({t:"bad", m:"Weight <3rd percentile"});
+    else if(pr===">97") r.alerts.push({t:"warn", m:"Weight >97th percentile"});
+  }
+
+  // Height-for-age range
+  if(h && h>0){
+    const hd = interpPD(am, d.ht);
+    const hcp = cutpoints(hd);
+    if(hcp){
+      const pr = toRangeLabel(h, hcp);
+      r.ht = {v:h, r:pr};
+      if(pr==="&lt;3" || pr==="<3") r.alerts.push({t:"bad", m:"Height <3rd percentile"});
+      else if(pr===">97") r.alerts.push({t:"info", m:"Height >97th percentile"});
+    }
+
+    // BMI (display value only — pediatric BMI percentile requires BMI-for-age reference curves)
+    const bmi = w/((h/100)**2);
+    r.bmi = {v: bmi.toFixed(1), st: "BMI shown (use BMI-for-age curve for percentile)"};
+  }
+  return r;
+}
+const CATS=["Emergency","Asthma","Antihistamines","Cough & Cold","ENT","GI","Antibiotics","Pain/Fever","Vitamins"];
+const ICOS={"Emergency":"🚨","Asthma":"💨","Antihistamines":"🤧","Cough & Cold":"🤒","ENT":"👂","GI":"🏥","Antibiotics":"💊","Pain/Fever":"🌡️","Vitamins":"💊"};
+const MEDS=[
+{id:"epi",cat:"Emergency",nm:"Epinephrine IM",sn:"Adrenaline IM",was:false,ind:"Anaphylaxis",ci:"None in emergency",mth:"epi",minM:0,maxM:216,frq:"q5-15min PRN",note:"0.01 mg/kg IM (max 0.5mg, 0.3mg if <30kg)",tips:"⚠️ IM anterolateral thigh ONLY. Observe 4-6h.",se:"Tachycardia, tremor",conc:[{l:"1 mg/mL",c:1}]},
+{id:"dex",cat:"Emergency",nm:"Dexamethasone (Croup)",sn:"Dexamethasone",was:false,ind:"Croup",ci:"Active fungal infection",mth:"dex",minM:3,maxM:72,frq:"Single dose",note:"Mild: 0.15 mg/kg | Severe: 0.6 mg/kg (max 10mg)",tips:"PO preferred. Effect lasts 24-72h.",conc:[{l:"4 mg/mL",c:4}]},
+{id:"salb_n",cat:"Asthma",nm:"Salbutamol Nebulizer",sn:"Salbutamol Neb",was:true,ind:"Acute asthma, bronchospasm",ci:"Hypersensitivity",mth:"salb_n",minM:0,maxM:216,frq:"q20min x3, then q1-4h",note:"0.15 mg/kg/dose (min 2.5mg, max 5mg)",tips:"⚠️ Monitor HR. Dilute to 3-4mL NS.",se:"Tachycardia, tremor, hypokalemia",conc:[{l:"5 mg/mL",c:5}]},
+{id:"salb_m",cat:"Asthma",nm:"Salbutamol MDI",sn:"Salbutamol MDI",was:true,ind:"Mild-moderate asthma",ci:"Hypersensitivity",mth:"salb_m",minM:0,maxM:216,frq:"q4-6h PRN",note:"100 mcg/puff. ALWAYS use spacer.",tips:"✓ 1 neb ≈ 6 puffs with spacer."},
+{id:"ipra",cat:"Asthma",nm:"Ipratropium Neb",sn:"Ipratropium",was:false,ind:"Severe asthma (add-on)",ci:"Atropine allergy",mth:"ipra",minM:0,maxM:216,frq:"q20min x3 (first hour)",note:"<6y: 250mcg | ≥6y: 500mcg",tips:"Mix with salbutamol. First 3 doses only."},
+{id:"pred",cat:"Asthma",nm:"Prednisolone",sn:"Prednisolone",was:true,ind:"Asthma exacerbation, croup, allergic reactions",ci:"Systemic fungal infection",mth:"pred",minM:0,maxM:216,frq:"Once daily x3-5 days",note:"1 mg/kg/day (max 40mg children)",tips:"Give with food. Morning dose. No taper if ≤7d.",se:"Hyperactivity, increased appetite",conc:[{l:"5 mg/5mL",c:1},{l:"15 mg/5mL",c:3}]},
+{id:"mont",cat:"Asthma",nm:"Montelukast",sn:"Montelukast",was:true,ind:"Asthma prevention, allergic rhinitis",ci:"Hypersensitivity",mth:"mont",minM:6,maxM:216,frq:"Once daily (evening)",note:"6mo-5y: 4mg | 6-14y: 5mg | ≥15y: 10mg",tips:"⚠️ FDA black box: neuropsychiatric effects. Not for acute."},
+{id:"bud_f",cat:"Asthma",nm:"Budesonide/Formoterol 160/4.5",sn:"Symbicort SMART",was:true,ind:"Asthma SMART ≥6y",ci:"<6y",mth:"fix",minM:72,maxM:216,frq:"BID + PRN",fix:"Maint: 1-2 puffs BID | PRN: 1 puff | Max 8/day (6-11y)",tips:"✓ Controller + reliever. Rinse mouth."},
+{id:"flut_s",cat:"Asthma",nm:"Fluticasone/Salmeterol 125/25",sn:"Seretide",was:true,ind:"Asthma maintenance ≥6y",ci:"<6y, acute asthma",mth:"fix",minM:72,maxM:216,frq:"BID",fix:"1 puff BID. Need separate reliever.",tips:"⚠️ NOT for acute. Rinse mouth."},
+{id:"cet",cat:"Antihistamines",nm:"Cetirizine",sn:"Cetirizine",was:false,ind:"Allergic rhinitis, urticaria",ci:"<2y (safety not established)",mth:"cet",minM:24,maxM:216,frq:"Once daily",note:"2-5y: 2.5-5mg | ≥6y: 5-10mg",tips:"⚠️ NOT for <2y - use Fenistil instead.",se:"Mild drowsiness",conc:[{l:"5 mg/5mL",c:1}]},
+{id:"lor",cat:"Antihistamines",nm:"Loratadine",sn:"Loratadine",was:false,ind:"Allergic rhinitis, urticaria",ci:"<2y",mth:"lor",minM:24,maxM:216,frq:"Once daily",note:"2-5y: 5mg | ≥6y: 10mg",tips:"Non-sedating.",conc:[{l:"5 mg/5mL",c:1}]},
+{id:"chl",cat:"Antihistamines",nm:"Chlorpheniramine",sn:"Chlorpheniramine",was:true,ind:"Allergic conditions, pruritus",ci:"<1y, MAOIs",mth:"chl",minM:12,maxM:216,frq:"q4-6h PRN (max 4/day)",note:"1-2y: 1mg | 2-5y: 1mg | 6-12y: 2mg | >12y: 4mg",tips:"⚠️ SEDATING. May cause paradoxical excitation.",se:"Sedation, dry mouth",conc:[{l:"2 mg/5mL",c:0.4}]},
+{id:"fen",cat:"Antihistamines",nm:"Fenistil (Dimethindene)",sn:"Fenistil Drops",was:false,ind:"Allergic conditions - SAFE ≥1 month",ci:"<1 month, premature",mth:"fen",minM:1,maxM:144,frq:"TID",note:"2 drops/kg/day ÷ TID | 1 drop=0.05mg | Max 14 days",tips:"⚠️ <1y: SLEEP APNEA risk. Use only if essential. Can add to warm bottle.",se:"Drowsiness, fatigue",conc:[{l:"1 mg/mL",c:1}]},
+{id:"dph",cat:"Cough & Cold",nm:"Diphenhydramine + Menthol",sn:"Diphenhydramine Cough",was:true,ind:"Dry cough (⚠️ NOT <6y)",ci:"<6y (not recommended), acute asthma",mth:"dph",minM:72,maxM:216,frq:"q6-8h PRN",note:"Diphenhydramine 1.4mg/mL + Menthol<br>⚠️ Combined cough syrups NOT recommended <6y",tips:"⚠️ SEDATING. NOT for <6y. Not for productive cough.",se:"Sedation"},
+{id:"tri",cat:"Cough & Cold",nm:"Triprolidine/DM/Pseudoephedrine",sn:"Triprolidine Combo",was:true,ind:"Cough + congestion (⚠️ NOT <6y)",ci:"<6y (NOT recommended), MAOIs, hypertension",mth:"tri",minM:72,maxM:216,frq:"q6-8h PRN (max 4/day)",note:"Triprolidine 0.25mg/mL + DM 2mg/mL + Pseudo 6mg/mL<br>⚠️ Combined cough syrups NOT recommended <6y",tips:"⚠️ NOT for <6y. Contains decongestant. Sedating.",se:"Sedation, tachycardia"},
+{id:"dxm",cat:"Cough & Cold",nm:"Dextromethorphan",sn:"Dextromethorphan",was:true,ind:"Dry cough (⚠️ NOT <6y)",ci:"<6y (not recommended), MAOIs, productive cough",mth:"dxm",minM:72,maxM:216,frq:"q6-8h PRN",note:"3 mg/mL<br>⚠️ Cough suppressants NOT recommended <6y",tips:"⚠️ NOT for <6y. Not for productive cough. Limited evidence.",se:"Dizziness, drowsiness"},
+{id:"mom",cat:"ENT",nm:"Mometasone Nasal 0.05%",sn:"Mometasone Nasal",was:true,ind:"Allergic rhinitis",ci:"Nasal infection",mth:"fix",minM:24,maxM:216,frq:"Once daily",fix:"2-11y: 1 spray/nostril | ≥12y: 2 sprays/nostril",tips:"✓ Aim away from septum. Takes 1-2 weeks."},
+{id:"flu_n",cat:"ENT",nm:"Fluticasone Nasal 0.05%",sn:"Fluticasone Nasal",was:true,ind:"Allergic rhinitis",ci:"Nasal infection",mth:"fix",minM:48,maxM:216,frq:"Daily",fix:"4-11y: 1 spray/nostril | ≥12y: 1-2 sprays/nostril",tips:"Shake before use."},
+{id:"bud_n",cat:"ENT",nm:"Budesonide Nasal 64mcg",sn:"Budesonide Nasal",was:true,ind:"Allergic rhinitis",ci:"Nasal infection",mth:"fix",minM:72,maxM:216,frq:"Daily-BID",fix:"≥6y: 1-2 sprays/nostril daily-BID",tips:"Prime before first use."},
+{id:"sal",cat:"ENT",nm:"Saline Nasal",sn:"Saline Nasal",was:true,ind:"Nasal congestion - ALL ages",ci:"None",mth:"fix",minM:0,maxM:216,frq:"PRN",fix:"1-2 drops/sprays each nostril PRN",tips:"✓ First-line for infants. Before feeds."},
+{id:"xyl",cat:"ENT",nm:"Xylometazoline 0.05%",sn:"Xylometazoline",was:true,ind:"Nasal congestion (MAX 3-5 days)",ci:"<2y, prolonged use",mth:"fix",minM:24,maxM:216,frq:"BID-TID (MAX 5 DAYS)",fix:"2-6y: 1-2 drops BID-TID | >6y: 2-3 drops BID-TID",tips:"⚠️ MAX 5 DAYS. Rebound congestion."},
+{id:"ond",cat:"GI",nm:"Ondansetron",sn:"Ondansetron",was:false,ind:"Vomiting in AGE",ci:"Long QT, QT drugs",mth:"ond",minM:6,maxM:216,frq:"Single dose",note:"8-15kg: 2mg | 15-30kg: 4mg | >30kg: 8mg",tips:"✓ ODT dissolves on tongue. Give before ORS.",se:"Headache, constipation",conc:[{l:"4 mg/5mL",c:0.8}]},
+{id:"lac",cat:"GI",nm:"Lactulose",sn:"Lactulose",was:true,ind:"Constipation",ci:"Galactosemia",mth:"lac",minM:1,maxM:216,frq:"Daily-BID",note:"Adjust for 1-2 soft stools/day",tips:"Takes 24-48h. Increase fluids.",conc:[{l:"667 mg/mL",c:667}]},
+{id:"dom",cat:"GI",nm:"Domperidone",sn:"Domperidone",was:true,ind:"⚠️ N/V: ONLY ≥12y & ≥35kg<br><12y: Use LOWEST dose if essential",ci:"Cardiac disease, QT prolongation, hepatic impairment, <35kg for N/V",mth:"dom",minM:0,maxM:216,frq:"TID before meals",note:"<12y (if essential): 250 mcg/kg TID<br>≥12y & ≥35kg: 10mg TID<br><b>MAX 1 WEEK</b>",tips:"⚠️ CARDIAC RISK. <12y: NOT for routine N/V - use lowest dose, shortest time. Review regularly.",se:"QT prolongation, extrapyramidal",conc:[{l:"1 mg/mL",c:1}]},
+{id:"hyo",cat:"GI",nm:"Hyoscine Butylbromide",sn:"Hyoscine",was:true,ind:"Abdominal cramps, colic",ci:"Glaucoma, ileus",mth:"hyo",minM:72,maxM:216,frq:"TID PRN",note:"6-12y: 5-10mg TID | >12y: 10-20mg TID",tips:"Take before meals.",conc:[{l:"5 mg/5mL",c:1}]},
+{id:"amx",cat:"Antibiotics",nm:"Amoxicillin 250mg/5mL",sn:"Amoxicillin",was:true,ind:"<b>Standard (40-50):</b> Pharyngitis, mild CAP<br><b>High (80-90):</b> AOM, sinusitis, severe CAP",ci:"PCN allergy, EBV",mth:"amx",minM:0,maxM:216,frq:"q8h",note:"Standard: 40-50 mg/kg/day | High: 80-90 mg/kg/day",tips:"✓ Shake. Refrigerate. Complete course.",conc:[{l:"250 mg/5mL",c:50}]},
+{id:"aug",cat:"Antibiotics",nm:"Co-amoxiclav (Augmentin)",sn:"Co-amoxiclav",was:true,ind:"<b>Standard:</b> Bites, mild skin<br><b>High dose:</b> Resistant AOM, severe sinusitis",ci:"PCN allergy, previous jaundice with augmentin",mth:"aug",minM:0,maxM:216,frq:"q8-12h",note:"Dose on AMOXICILLIN component",tips:"⚠️ Give WITH FOOD. More diarrhea.",conc:[{l:"25mg amox/mL",c:25}]},
+{id:"azi",cat:"Antibiotics",nm:"Azithromycin 200mg/5mL",sn:"Azithromycin",was:true,ind:"10mg/kg/day x3d: Atypical pneumonia, pertussis, GAS (PCN allergy)",ci:"Macrolide allergy, QT drugs",mth:"azi",minM:6,maxM:216,frq:"Once daily x3 days",note:"10 mg/kg/day (max 500mg) x 3 days",tips:"⚠️ QT risk. 3-day = 5-day efficacy.",conc:[{l:"200 mg/5mL",c:40}]},
+{id:"cef",cat:"Antibiotics",nm:"Cefuroxime 125mg/5mL",sn:"Cefuroxime",was:true,ind:"20-30 mg/kg/day: AOM (2nd line), sinusitis, UTI",ci:"Cephalosporin allergy",mth:"cef",minM:3,maxM:216,frq:"q12h",note:"20-30 mg/kg/day ÷ BID (max 500mg)",tips:"Give WITH FOOD. Bitter.",conc:[{l:"125 mg/5mL",c:25}]},
+{id:"tmp",cat:"Antibiotics",nm:"TMP-SMX",sn:"TMP-SMX",was:true,ind:"UTI, MRSA skin infections (NOT for strep)",ci:"Sulfa allergy, G6PD, <2mo",mth:"tmp",minM:2,maxM:216,frq:"q12h",note:"6-12 mg TMP/kg/day ÷ BID",tips:"⚠️ Hydration. Photosensitivity.",conc:[{l:"40mg TMP/5mL",c:8}]},
+{id:"met",cat:"Antibiotics",nm:"Metronidazole 125mg/5mL",sn:"Metronidazole",was:true,ind:"Giardia, amoebiasis, C. diff, anaerobes",ci:"Alcohol use",mth:"met",minM:0,maxM:216,frq:"q8h",note:"Giardia: 15 mg/kg/day | Anaerobic: 22.5-30 mg/kg/day",tips:"⚠️ NO ALCOHOL during + 48h after.",conc:[{l:"125 mg/5mL",c:25}]},
+{id:"p120",cat:"Pain/Fever",nm:"Paracetamol 120mg/5mL",sn:"Paracetamol 120",was:true,ind:"Fever, mild-moderate pain",ci:"Severe hepatic impairment",mth:"para",minM:0,maxM:216,frq:"q4-6h PRN (max 4/day)",note:"10-15 mg/kg/dose | Max 75mg/kg/day",tips:"⚠️ Check for paracetamol in other products.",conc:[{l:"120 mg/5mL",c:24}]},
+{id:"p160",cat:"Pain/Fever",nm:"Paracetamol 160mg/5mL SF",sn:"Paracetamol 160 SF",was:true,ind:"Fever, pain (sugar-free)",ci:"Severe hepatic impairment",mth:"para",minM:0,maxM:216,frq:"q4-6h PRN (max 4/day)",note:"10-15 mg/kg/dose | Sugar-free",tips:"✓ Sugar-free for diabetics.",conc:[{l:"160 mg/5mL",c:32}]},
+{id:"ps100",cat:"Pain/Fever",nm:"Paracetamol Supp 100mg",sn:"Paracetamol Supp 100",was:true,ind:"Fever (when vomiting)",ci:"Rectal pathology",mth:"paras",minM:0,maxM:216,frq:"q4-6h PRN",note:"10-15 mg/kg/dose",tips:"✓ Use when vomiting. Moisten."},
+{id:"ps125",cat:"Pain/Fever",nm:"Paracetamol Supp 125mg",sn:"Paracetamol Supp 125",was:true,ind:"Fever (when vomiting)",ci:"Rectal pathology",mth:"paras",minM:0,maxM:216,frq:"q4-6h PRN",note:"10-15 mg/kg/dose",tips:"✓ Refrigerate."},
+{id:"ibs",cat:"Pain/Fever",nm:"Ibuprofen 100mg/5mL",sn:"Ibuprofen Syrup",was:true,ind:"Fever, pain, inflammation",ci:"<6mo, GI bleeding, dehydration",mth:"ibu",minM:6,maxM:216,frq:"q6-8h PRN",note:"5-10 mg/kg/dose | Max 40mg/kg/day",tips:"✓ Give with food. Ensure hydration.",conc:[{l:"100 mg/5mL",c:20}]},
+{id:"ibt",cat:"Pain/Fever",nm:"Ibuprofen 400mg Tab",sn:"Ibuprofen 400 Tab",was:true,ind:"Fever, pain (≥12y)",ci:"<12y, GI bleeding",mth:"fix",minM:144,maxM:216,frq:"q6-8h PRN",fix:"200-400mg q6-8h (max 1.2g/day)",tips:"✓ Give with food."},
+{id:"dic",cat:"Pain/Fever",nm:"Diclofenac Supp 12.5mg",sn:"Diclofenac Supp",was:true,ind:"Moderate-severe fever, inflammatory pain",ci:"<6mo, GI bleeding, dehydration",mth:"dic",minM:6,maxM:216,frq:"BID-TID (MAX 3 days)",note:"0.5-1 mg/kg/dose | Max 3mg/kg/day",tips:"⚠️ Reserve for moderate-severe. MAX 3 days."},
+{id:"vdd",cat:"Vitamins",nm:"Vitamin D3 Drops 2800 IU/mL",sn:"Vitamin D Drops",was:true,ind:"<b>PREVENTION (4 drops=400 IU):</b><br>• ALL breastfed infants<br>• Formula <1L/day<br><b>TREATMENT:</b> By level",ci:"Hypercalcemia",mth:"vitd",minM:0,maxM:216,frq:"Once daily",note:"<b>Each drop = 100 IU</b><br><b>Prevention:</b> 400 IU (4 drops)<br><b>Treatment:</b><br>• 20-29: 1000-2000 IU/d<br>• 10-19: 2000-4000 IU/d<br>• <10: 50,000 IU/wk x6-8wk",tips:"✓ Give with fatty meal. Recheck in 3mo."},
+{id:"vdc",cat:"Vitamins",nm:"Vitamin D3 Capsules",sn:"Vitamin D Caps",was:true,ind:"Treatment of documented deficiency",ci:"Hypercalcemia",mth:"fix",minM:72,maxM:216,frq:"As directed",fix:"<b>By Level:</b><br>• 20-29: 1000-2000 IU daily<br>• 10-19: 50,000 IU weekly x6wk<br>• <10: 50,000 IU weekly x8wk<br><b>Maintenance:</b> 400-1000 IU daily",tips:"⚠️ 50,000 IU for treatment ONLY. Monitor."},
+{id:"fed",cat:"Vitamins",nm:"Ferrous Sulfate Drops 25mg/mL",sn:"Iron Drops",was:true,ind:"<b>Treatment:</b> Iron deficiency anemia<br><b>Prevention:</b> Preterm, LBW, breastfed >4mo",ci:"Hemochromatosis",mth:"fe",minM:0,maxM:216,frq:"Daily or ÷ BID",note:"Treatment: 3-6 mg Fe/kg/day<br>Prevention: 1-2 mg Fe/kg/day",tips:"💡 Give with vit C. Dark stools normal. STAINS TEETH.",conc:[{l:"25 mg Fe/mL",c:25}]},
+{id:"fep",cat:"Vitamins",nm:"Iron Polymaltose 10mg/mL",sn:"Iron Polymaltose",was:true,ind:"Iron deficiency (better tolerated)",ci:"Hemochromatosis",mth:"fe",minM:0,maxM:216,frq:"Daily",note:"Treatment: 3-6 mg Fe/kg/day<br>Prevention: 1-2 mg Fe/kg/day",tips:"✓ Better tolerated. Can give with food.",conc:[{l:"10 mg Fe/mL",c:10}]}
+];
+let hist=JSON.parse(localStorage.getItem('hist')||'[]');
+let favs=JSON.parse(localStorage.getItem('favs')||'[]');
+let expC=JSON.parse(localStorage.getItem('expC')||'[]');
+function rnd(x){if(!x||isNaN(x))return'';const n=Math.round(x*10)/10;return n>=10||Number.isInteger(n)?String(n):n.toFixed(1);}
+function rndMl(ml){if(ml<1)return Math.round(ml*4)/4;if(ml<5)return Math.round(ml*2)/2;return Math.round(ml);}
+function bg(s,l){return`<span class="badge b-${s}">${l}</span>`;}
+function calc(med,am,w){
+if(!w||w<=0)return{st:'bad',lb:'No wt',tx:'—'};
+if(am<med.minM||am>med.maxM)return{st:'bad',lb:'Age',tx:'Not indicated'};
+const m=med.mth;
+if(m==='fix')return{st:'warn',lb:'Ref',tx:med.fix||'See notes'};
+if(m==='epi'){let mg=0.01*w;mg=Math.min(mg,w<30?0.3:0.5);return{st:'ok',lb:'✓',tx:`${rnd(mg)} mg IM`};}
+if(m==='dex'){return{st:'ok',lb:'✓',tx:`Mild: ${rnd(0.15*w)} mg | Severe: ${rnd(Math.min(0.6*w,10))} mg`};}
+if(m==='salb_n'){let mg=Math.max(2.5,Math.min(0.15*w,5));return{st:'ok',lb:'✓',tx:`${rnd(mg)} mg (${rnd(mg/5)} mL)`};}
+if(m==='salb_m')return{st:'warn',lb:'Ref',tx:am<24?'2-4 puffs':am<72?'4-6 puffs':'6-10 puffs'};
+if(m==='ipra')return{st:'warn',lb:'Ref',tx:am<72?'250 mcg':'500 mcg'};
+if(m==='pred'){const mg=Math.min(w,40);return{st:'ok',lb:'✓',tx:`${rnd(mg)} mg daily (1 mg/kg)`};}
+if(m==='mont'){if(am<72)return{st:'ok',lb:'✓',tx:'4 mg chewable'};if(am<180)return{st:'ok',lb:'✓',tx:'5 mg chewable'};return{st:'ok',lb:'✓',tx:'10 mg tablet'};}
+if(m==='cet'){if(am<24)return{st:'bad',lb:'<2y',tx:'⚠️ NOT recommended <2y'};if(am<72)return{st:'ok',lb:'✓',tx:'2.5-5 mg daily'};return{st:'ok',lb:'✓',tx:'5-10 mg daily'};}
+if(m==='lor'){if(am<72)return{st:'ok',lb:'✓',tx:'5 mg daily'};return{st:'ok',lb:'✓',tx:'10 mg daily'};}
+if(m==='chl'){if(am<24)return{st:'warn',lb:'Caution',tx:'1 mg/dose'};if(am<72)return{st:'ok',lb:'✓',tx:'1 mg/dose'};if(am<144)return{st:'ok',lb:'✓',tx:'2 mg/dose'};return{st:'ok',lb:'✓',tx:'4 mg/dose'};}
+if(m==='fen'){const d=Math.round(2*w/3);return{st:am<12?'warn':'ok',lb:am<12?'<1y Care':'✓',tx:`${d} drops TID (${rnd(2*w)} drops/day)`};}
+if(m==='dph'){if(am<72)return{st:'bad',lb:'<6y',tx:'⚠️ NOT recommended <6 years'};if(am<144)return{st:'warn',lb:'Caution',tx:'5-10 mL q6-8h'};return{st:'ok',lb:'✓',tx:'10-20 mL q6-8h'};}
+if(m==='tri'){if(am<72)return{st:'bad',lb:'<6y',tx:'⚠️ NOT recommended <6 years'};if(am<144)return{st:'warn',lb:'Caution',tx:'5 mL q6-8h'};return{st:'ok',lb:'✓',tx:'10 mL q6-8h'};}
+if(m==='dxm'){if(am<72)return{st:'bad',lb:'<6y',tx:'⚠️ NOT recommended <6 years'};if(am<144)return{st:'warn',lb:'Caution',tx:'5-10 mL q6-8h'};return{st:'ok',lb:'✓',tx:'10-20 mL q6-8h'};}
+if(m==='ond'){if(w<8)return{st:'warn',lb:'Caution',tx:'0.15 mg/kg'};if(w<=15)return{st:'ok',lb:'✓',tx:'2 mg'};if(w<=30)return{st:'ok',lb:'✓',tx:'4 mg'};return{st:'ok',lb:'✓',tx:'8 mg'};}
+if(m==='lac'){if(am<36)return{st:'warn',lb:'Ref',tx:'2.5-5 mL daily'};if(am<72)return{st:'warn',lb:'Ref',tx:'5-10 mL daily'};return{st:'warn',lb:'Ref',tx:'10-15 mL daily'};}
+if(m==='dom'){const mgkg=rnd(0.25*w);if(am<144)return{st:'warn',lb:'⚠️ Caution',tx:`<b>If essential:</b> ${mgkg} mg (250 mcg/kg) TID<br>⚠️ NOT for routine N/V in <12y`};if(w<35)return{st:'warn',lb:'<35kg',tx:`${mgkg} mg TID - use lowest dose`};return{st:'warn',lb:'⚠️',tx:'10 mg TID (MAX 1 WEEK)'};}
+if(m==='hyo'){if(am<144)return{st:'ok',lb:'✓',tx:'5-10 mg TID'};return{st:'ok',lb:'✓',tx:'10-20 mg TID'};}
+if(m==='amx'){const s=Math.min(rnd(45*w/3),500),h=Math.min(rnd(90*w/3),1000);return{st:'ok',lb:'✓',tx:`<b>Standard:</b> ${s} mg q8h<br><b>High:</b> ${h} mg q8h`};}
+if(m==='aug'){const s=Math.min(rnd(40*w/3),500),h=Math.min(rnd(90*w/3),875);return{st:'ok',lb:'✓',tx:`<b>Standard:</b> ${s} mg q8h<br><b>High:</b> ${h} mg q8h`};}
+if(m==='azi'){return{st:'ok',lb:'✓',tx:`${rnd(Math.min(10*w,500))} mg daily x3d`};}
+if(m==='cef'){return{st:'ok',lb:'✓',tx:`${rnd(Math.min(15*w,500))} mg q12h`};}
+if(m==='tmp'){return{st:'ok',lb:'✓',tx:`${rnd(Math.min(4*w,160))} mg TMP q12h`};}
+if(m==='met'){const g=rnd(Math.min(7.5*w,250)),a=rnd(Math.min(10*w,500));return{st:'ok',lb:'✓',tx:`<b>Giardia:</b> ${g} mg q8h<br><b>Anaerobic:</b> ${a} mg q8h`};}
+if(m==='para'){const lo=rnd(10*w),hi=rnd(15*w);return{st:'ok',lb:'✓',tx:`${lo}-${hi} mg/dose`};}
+if(m==='paras'){const lo=rnd(10*w),hi=rnd(15*w);return{st:'ok',lb:'✓',tx:`${lo}-${hi} mg PR`};}
+if(m==='ibu'){const lo=rnd(5*w),hi=rnd(10*w);return{st:'ok',lb:'✓',tx:`${lo}-${hi} mg/dose`};}
+if(m==='dic'){const lo=rnd(0.5*w),hi=rnd(w);return{st:'warn',lb:'⚠️',tx:`${lo}-${hi} mg BID-TID (max 3d)`};}
+if(m==='vitd')return{st:'ok',lb:'✓',tx:'<b>Prevention:</b> 4 drops (400 IU) daily'};
+if(m==='fe'){const t=rnd(4.5*w),p=rnd(1.5*w);return{st:'ok',lb:'✓',tx:`<b>Treatment:</b> ${t} mg/day<br><b>Prevention:</b> ${p} mg/day`};}
+return{st:'warn',lb:'Ref',tx:med.note||'See notes'};
+}
+function getMl(tx,c){if(!c||!tx)return'';const cl=tx.replace(/<[^>]*>/g,'');const mt=cl.match(/(\d+\.?\d*)\s*[-–]?\s*(\d+\.?\d*)?\s*mg/);if(!mt)return'';const lo=parseFloat(mt[1]),hi=mt[2]?parseFloat(mt[2]):lo;const mlo=rndMl(lo/c.c),mhi=rndMl(hi/c.c);return mlo===mhi?`${mlo} mL`:`${mlo}-${mhi} mL`;}
+function updG(){
+const y=+($('#ageY').value||0),mo=+($('#ageM').value||0),w=+($('#wt').value||0),h=+($('#ht').value||0),s=$('#sex').value,am=y*12+mo;
+const sb=$('#sumBox');sb.textContent=`${y}y ${mo}m (${am} months) • ${w} kg${h?' • '+h+' cm':''}`;sb.className='sum'+(s?' '+s:'');
+$('#sex').className=s||'';
+const aD=$('#gAlert'),sD=$('#gSum');
+if(!s||!w){aD.innerHTML='';sD.innerHTML='';return;}
+let g=null;
+if(LMS.ready){
+  const gp = saudiPercentiles(s, am, w, h);
+  if(gp){
+    g={wt:null,ht:null,bmi:null,alerts:[]};
+    if(gp.wt){ g.wt={v:w, r:gp.wt.r}; if(gp.wt.p<3) g.alerts.push({t:"bad",m:"Weight <3rd percentile"}); else if(gp.wt.p>97) g.alerts.push({t:"warn",m:"Weight >97th percentile"}); }
+    if(gp.ht){ g.ht={v:h, r:gp.ht.r}; if(gp.ht.p<3) g.alerts.push({t:"bad",m:"Height <3rd percentile"}); else if(gp.ht.p>97) g.alerts.push({t:"info",m:"Height >97th percentile"}); }
+    if(gp.bmi){
+      let st="Normal";
+      if(gp.bmi.p<5) st="Underweight";
+      else if(gp.bmi.p>=85 && gp.bmi.p<95) st="Overweight";
+      else if(gp.bmi.p>=95) st="Obesity";
+      g.bmi={v: gp.bmi.v.toFixed?gp.bmi.v.toFixed(1):gp.bmi.v, st: `${st} (${gp.bmi.r} %ile range)`};
+    }
+  }
+}
+if(!g) g=chkG(am,w,h,s);if(!g){aD.innerHTML='';sD.innerHTML='';return;}
+let ah='';g.alerts.forEach(a=>{const cl=a.t==='bad'?'alert-box':a.t==='warn'?'warn-box':'info-box';const ic=s==='male'?'👦':'👧';ah+=`<div class="${cl}"><span style="font-size:20px">${ic}</span><div><b>Saudi Growth:</b> ${a.m}</div></div>`;});
+aD.innerHTML=ah;
+let pts=[];if(g.wt)pts.push(`Wt: <b>${g.wt.r} %ile range</b>`);if(g.ht)pts.push(`Ht: <b>${g.ht.r} %ile range</b>`);if(g.bmi)pts.push(`BMI: <b>${g.bmi.v} (${g.bmi.st})</b>`);
+sD.innerHTML=pts.length?`<div class="growth-box"><b>${s==='male'?'👦':'👧'} Growth (Saudi):</b> ${pts.join(' • ')}</div>`:'';
+}
+function render(){
+updG();
+const y=+($('#ageY').value||0),mo=+($('#ageM').value||0),w=+($('#wt').value||0),am=y*12+mo;
+const q=($('#srcBox').value||'').toLowerCase();
+const box=$('#catBox');box.innerHTML='';
+CATS.forEach(cat=>{
+let ms=MEDS.filter(m=>m.cat===cat);
+if(q)ms=ms.filter(m=>[m.nm,m.sn,m.ind||'',m.note||''].join(' ').toLowerCase().includes(q));
+if(!ms.length)return;
+const ex=expC.includes(cat);
+const sec=document.createElement('div');sec.className='cat';
+const hdr=document.createElement('div');hdr.className='cat-hdr'+(ex?' exp':'');
+hdr.innerHTML=`<div class="cat-ttl"><div class="cat-ico">${ICOS[cat]||'💊'}</div><span>${cat}</span><span class="cat-cnt">${ms.length}</span></div><span class="cat-arr">▼</span>`;
+hdr.onclick=()=>{const i=expC.indexOf(cat);if(i>-1)expC.splice(i,1);else expC.push(cat);localStorage.setItem('expC',JSON.stringify(expC));render();};
+const body=document.createElement('div');body.className='cat-body'+(ex?' exp':'');
+ms.forEach(med=>{
+const res=calc(med,am,w);
+const cn=med.conc?.[0];
+const ml=getMl(res.tx,cn);
+const isFav=favs.includes(med.id);
+const ws=med.was?'<span class="badge b-was">Wasfaty</span>':'';
+const card=document.createElement('div');card.className='med';
+card.innerHTML=`
+<div class="med-c">
+<div class="med-hdr"><div class="med-nm">${med.sn||med.nm}</div><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">${bg(res.st,res.lb)}${ws}<span class="fav" data-id="${med.id}">${isFav?'⭐':'☆'}</span></div></div>
+<div class="dose-c">${res.tx}</div>
+${ml?`<div class="ml-c">📏 ${ml}</div>`:''}
+<div class="freq-c">${med.frq||''}</div>
+<div class="hint">Tap for details ▼</div>
+</div>
+<div class="med-e">
+<div class="med-nmf">${med.nm}</div>
+<div style="display:flex;gap:6px;align-items:center;margin-bottom:12px;flex-wrap:wrap">${bg(res.st,res.lb)}${ws}<span class="fav" data-id="${med.id}">${isFav?'⭐':'☆'}</span></div>
+<div class="dose-e">${res.tx}</div>
+${ml?`<div class="ml-e">📏 ${ml}</div>`:''}
+<div class="freq-e">${med.frq||''}</div>
+${med.tips?`<div class="info-box" style="margin-top:12px"><b style="color:#e3f2ff">💡</b> ${med.tips}</div>`:''}
+<div class="det"><div class="det-h"><span>📋 Indication & CI</span><span class="det-ico">▼</span></div><div class="det-b"><div class="det-in"><div class="note"><b>Indication:</b><br>${med.ind||'—'}<br><br><b>Contraindications:</b><br>${med.ci||'—'}</div></div></div></div>
+${med.note?`<div class="det"><div class="det-h"><span>📝 Dosing Notes</span><span class="det-ico">▼</span></div><div class="det-b"><div class="det-in"><div class="note">${med.note}</div></div></div></div>`:''}
+${med.se?`<div class="det"><div class="det-h"><span>⚠️ Side Effects</span><span class="det-ico">▼</span></div><div class="det-b"><div class="det-in"><div class="note">${med.se}</div></div></div></div>`:''}
+<button class="btn coll">▲ Collapse</button>
+</div>`;
+card.addEventListener('click',e=>{if(e.target.closest('.fav')||e.target.closest('.coll')||e.target.closest('.det-h'))return;if(!card.classList.contains('exp'))card.classList.add('exp');});
+card.querySelector('.coll')?.addEventListener('click',e=>{e.stopPropagation();card.classList.remove('exp');});
+card.querySelectorAll('.fav').forEach(b=>{b.addEventListener('click',e=>{e.stopPropagation();const id=b.dataset.id;const i=favs.indexOf(id);if(i>-1)favs.splice(i,1);else favs.push(id);localStorage.setItem('favs',JSON.stringify(favs));render();});});
+card.querySelectorAll('.det-h').forEach(dh=>{dh.addEventListener('click',e=>{e.stopPropagation();const db=dh.nextElementSibling;dh.classList.toggle('open');db.classList.toggle('open');});});
+body.appendChild(card);
+});
+sec.appendChild(hdr);sec.appendChild(body);box.appendChild(sec);
+});
+}
+function $(s){return document.querySelector(s);}
+// ---------------- Saudi LMS (accurate percentiles) ----------------
+const LMS = {
+  ready: false,
+  data: null,
+  // Base PMC pages (contain LMS tables as HTML). These must be fetched via a CORS proxy in browsers.
+  urls: {
+    preschool: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6074277/", // 0–60 months
+    school:    "https://pmc.ncbi.nlm.nih.gov/articles/PMC6074406/"  // 5–18 years
+  }
+};
+
+// NOTE: NCBI/PMC pages do NOT send CORS headers, so browsers cannot fetch them directly.
+// We therefore fetch the HTML through a CORS proxy (AllOrigins first, then CorsProxy as fallback).
+const LMS_PROXIES = [
+  (u)=>`https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+  (u)=>`https://corsproxy.io/?url=${encodeURIComponent(u)}`
+];
+
+async function fetchHtmlViaProxy(url){
+  let lastErr = null;
+  for(const mk of LMS_PROXIES){
+    const proxied = mk(url);
+    try{
+      const r = await fetch(proxied, {cache:"force-cache"});
+      if(!r.ok) throw new Error(`HTTP ${r.status}`);
+      const t = await r.text();
+      // basic sanity: must include at least one <table>
+      if(!t || !t.includes("<table")) throw new Error("No HTML tables found (proxy returned non-HTML).");
+      return t;
+    }catch(e){
+      lastErr = e;
+    }
+  }
+  throw lastErr || new Error("Proxy fetch failed");
+}
+
+function _num(x){
+  if(x==null) return NaN;
+  // normalize unicode minus and scientific forms
+  return parseFloat(String(x).replace(/[−–]/g,'-').replace(/,/g,'').trim());
+}
+
+function _normCdf(z){
+  // CDF of standard normal using erf
+  return 0.5*(1+Math.erf(z/Math.SQRT2));
+}
+
+function _zFromLMS(x,L,M,S){
+  if(!(x>0) || !(M>0) || !(S>0) || !isFinite(L)) return NaN;
+  if(Math.abs(L) < 1e-8){
+    return Math.log(x/M)/S;
+  }
+  return (Math.pow(x/M, L) - 1) / (L*S);
+}
+
+function _pctToRange(p){
+  if(!isFinite(p)) return null;
+  const cuts = [3,5,10,25,50,75,90,95,97];
+  if(p < cuts[0]) return "<3";
+  for(let i=0;i<cuts.length-1;i++){
+    if(p >= cuts[i] && p < cuts[i+1]) return `${cuts[i]}–${cuts[i+1]}`;
+  }
+  if(p >= cuts[cuts.length-1]) return ">97";
+  return null;
+}
+
+function _interpLMS(arr, age){
+  // arr: [{age,L,M,S}] sorted
+  if(!arr || !arr.length) return null;
+  if(age <= arr[0].age) return arr[0];
+  if(age >= arr[arr.length-1].age) return arr[arr.length-1];
+  for(let i=0;i<arr.length-1;i++){
+    const a0=arr[i], a1=arr[i+1];
+    if(age >= a0.age && age <= a1.age){
+      const t = (age - a0.age) / (a1.age - a0.age);
+      return {
+        age,
+        L: a0.L + t*(a1.L-a0.L),
+        M: a0.M + t*(a1.M-a0.M),
+        S: a0.S + t*(a1.S-a0.S),
+      };
+    }
+  }
+  return arr[arr.length-1];
+}
+
+function _extractTableMap(doc){
+  const map = [];
+  const tables = Array.from(doc.querySelectorAll("table"));
+  for(const t of tables){
+    const cap = t.querySelector("caption");
+    const title = cap ? cap.textContent.replace(/\s+/g,' ').trim() : "";
+    if(!title) continue;
+    map.push({title, table:t});
+  }
+  return map;
+}
+
+function _parseLmsFromTable(table){
+  const rows = Array.from(table.querySelectorAll("tr"));
+  const out = [];
+  for(const r of rows){
+    const cells = Array.from(r.querySelectorAll("th,td")).map(c=>c.textContent.replace(/\s+/g,' ').trim());
+    if(cells.length < 4) continue;
+    const age = _num(cells[0]);
+    const L = _num(cells[1]);
+    const M = _num(cells[2]);
+    const S = _num(cells[3]);
+    if(isFinite(age) && isFinite(L) && isFinite(M) && isFinite(S)){
+      out.push({age, L, M, S});
+    }
+  }
+  // sort by age
+  out.sort((a,b)=>a.age-b.age);
+  return out;
+}
+
+async function loadSaudiLMS(){
+  try{
+    $("#lmsStatus").textContent = "Loading…";
+    const cacheKey = "saudi_lms_v1";
+    const cached = localStorage.getItem(cacheKey);
+    if(cached){
+      LMS.data = JSON.parse(cached);
+      LMS.ready = true;
+      $("#lmsStatus").textContent = "Loaded (cached)";
+      return true;
+    }
+
+    const [h0, h1] = await Promise.all([
+      fetchHtmlViaProxy(LMS.urls.preschool),
+      fetchHtmlViaProxy(LMS.urls.school)
+    ]);
+
+    const p0 = new DOMParser().parseFromString(h0, "text/html");
+    const p1 = new DOMParser().parseFromString(h1, "text/html");
+
+    const t0 = _extractTableMap(p0);
+    const t1 = _extractTableMap(p1);
+
+    // helper to find a table by caption substring(s)
+    function findTable(list, includes){
+      const inc = Array.isArray(includes) ? includes : [includes];
+      const item = list.find(x => inc.every(s => x.title.toLowerCase().includes(String(s).toLowerCase())));
+      return item ? item.table : null;
+    }
+
+    // Preschool (0–60 months)
+    const pre = {
+      male: {
+        wfa: _parseLmsFromTable(findTable(t0, ["weight (kg) for age", "boys 0 to 60 months"])),
+        hfa: _parseLmsFromTable(findTable(t0, ["length/height (cm) for age", "boys 0 to 60 months"])),
+        bmi: _parseLmsFromTable(findTable(t0, ["body mass index", "boys 0 to 60 months"])),
+      },
+      female: {
+        wfa: _parseLmsFromTable(findTable(t0, ["weight (kg) for age", "girls 0 to 60 months"])),
+        hfa: _parseLmsFromTable(findTable(t0, ["length/height (cm) for age", "girls 0 to 60 months"])),
+        bmi: _parseLmsFromTable(findTable(t0, ["body mass index", "girls 0 to 60 months"])),
+      }
+    };
+
+    // School-age (5–18 years)
+    const sch = {
+      male: {
+        wfa: _parseLmsFromTable(findTable(t1, ["weight for age", "boys 5 to 18 years"])),
+        hfa: _parseLmsFromTable(findTable(t1, ["height for age", "boys 5 to 18 years"])),
+        bmi: _parseLmsFromTable(findTable(t1, ["body mass index", "boys 5 to 18 years"])),
+      },
+      female: {
+        wfa: _parseLmsFromTable(findTable(t1, ["weight for age", "girls 5 to 18 years"])),
+        hfa: _parseLmsFromTable(findTable(t1, ["height for age", "girls 5 to 18 years"])),
+        bmi: _parseLmsFromTable(findTable(t1, ["body mass index", "girls 5 to 18 years"])),
+      }
+    };
+
+    // Basic sanity check
+    if(!pre.male.wfa.length || !sch.male.hfa.length){
+      throw new Error("Could not parse LMS tables (tables not found).");
+    }
+
+    LMS.data = {pre, sch};
+    LMS.ready = true;
+    localStorage.setItem(cacheKey, JSON.stringify(LMS.data));
+    $("#lmsStatus").textContent = "Loaded ✅";
+    return true;
+  }catch(e){
+    console.warn(e);
+    LMS.ready = false;
+    LMS.data = null;
+    $("#lmsStatus").textContent = "Failed to load ❌";
+    const ga = document.getElementById("gAlert");
+    if(ga){ ga.innerHTML = `<div class="alert-box"><span style="font-size:22px">❌</span><div><b>Saudi LMS failed to load</b><br><span style="color:#ffd7d7">${String(e&&e.message?e.message:e)}</span><br><span style="color:#9fb0d0">Tip: If you are offline, load once online to cache it, then it will work offline.</span></div></div>`; }
+
+    return false;
+  }
+}
+
+function saudiPercentiles(sex, ageMonths, wtKg, htCm){
+  if(!LMS.ready || !LMS.data || !sex) return null;
+  const isPre = ageMonths <= 60;
+  const ageY = ageMonths/12;
+  const set = isPre ? LMS.data.pre : LMS.data.sch;
+  const src = set[sex];
+  if(!src) return null;
+
+  const wfaL = _interpLMS(src.wfa, isPre ? ageMonths : ageY);
+  const hfaL = _interpLMS(src.hfa, isPre ? ageMonths : ageY);
+  const bmiL = _interpLMS(src.bmi, isPre ? ageMonths : ageY);
+
+  const bmi = (wtKg>0 && htCm>0) ? (wtKg/Math.pow(htCm/100,2)) : NaN;
+
+  const out = {};
+  if(wtKg>0 && wfaL){
+    const z = _zFromLMS(wtKg, wfaL.L, wfaL.M, wfaL.S);
+    const p = _normCdf(z)*100;
+    out.wt = {p, r:_pctToRange(p)};
+  }
+  if(htCm>0 && hfaL){
+    const z = _zFromLMS(htCm, hfaL.L, hfaL.M, hfaL.S);
+    const p = _normCdf(z)*100;
+    out.ht = {p, r:_pctToRange(p)};
+  }
+  if(isFinite(bmi) && bmi>0 && bmiL){
+    const z = _zFromLMS(bmi, bmiL.L, bmiL.M, bmiL.S);
+    const p = _normCdf(z)*100;
+    out.bmi = {v:+bmi.toFixed(1), p, r:_pctToRange(p)};
+  }
+  return out;
+}
+// ---------------------------------------------------------------
+$('#ageY').addEventListener('input',render);
+$('#ageM').addEventListener('input',render);
+$('#wt').addEventListener('input',render);
+$('#ht').addEventListener('input',render);
+$('#sex').addEventListener('change',render);
+$('#srcBox').addEventListener('input',render);
+// LMS button
+const _lmsBtn = document.getElementById('lmsBtn');
+if(_lmsBtn){
+  _lmsBtn.addEventListener('click', async ()=>{
+    await loadSaudiLMS();
+    render();
+  });
+  // auto-load from cache if previously loaded
+  if(localStorage.getItem('saudi_lms_v1')){
+    loadSaudiLMS().then(()=>render());
+  }
+}
+$('#histBtn').addEventListener('click',()=>{$('#histModal').classList.add('active');$('#histList').innerHTML=hist.length?hist.map(h=>`<div class="hist"><b>${h.med}</b>: ${h.dose} (${h.wt}kg)</div>`).join(''):'<p>No history yet</p>';});
+$('#histX').addEventListener('click',()=>$('#histModal').classList.remove('active'));
+$('#histClr').addEventListener('click',()=>{hist=[];localStorage.setItem('hist','[]');$('#histList').innerHTML='<p>Cleared</p>';});
+$('#favBtn').addEventListener('click',()=>{$('#favModal').classList.add('active');const fm=MEDS.filter(m=>favs.includes(m.id));$('#favList').innerHTML=fm.length?fm.map(m=>`<div class="hist" style="cursor:pointer" onclick="$('#srcBox').value='${m.sn}';$('#favX').click();render();"><b>${m.sn}</b> - ${m.cat}</div>`).join(''):'<p>No favorites. Tap ☆ to add.</p>';});
+$('#favX').addEventListener('click',()=>$('#favModal').classList.remove('active'));
+document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('active');}));
+render();
+</script>
+</body>
+</html>
