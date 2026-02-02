@@ -1,0 +1,1998 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+<meta name="theme-color" content="#0a0f1e"/>
+<meta name="description" content="PHC Pediatric Dose & Formulary - Modern medical reference with Saudi Growth Charts"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="PHC Pediatric"/>
+<link rel="manifest" href="#" id="manifest-placeholder"/>
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAsQAAALEBxi1JjQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAKcSURBVFiFvZdNaBNBGIaf2U2apJu0aZPGNKlNqz8x1R8UQRBB8OBBEDx4UPDgQRA8eBDEk6AHxYMHQfDgQRA8eBDEk4iCB8GDSW2sjW3S/GybNJvd2Rkdkm422WQ3TfvCwu7sMN/zzTczO/MtiAhbGbI1zQDYB+wH9gI1QDWQABaBOeAN8Bp4BkxsRYEtgbcDh4HDwAGgIst7k8Bj4CHwCFjJdLOlBRqBU8ApoKKA9y8DJ4FrQCqdQUIBJ+sFhoBjQGkB75cCx4Gh1Dl6MwksBs5Rgw9CL3AC6AfOu28qKeDXYOODRw3QD5wHYqkXFRJ4b+ODB48a4CvwJvVi2ipoN3DV5u2JEu1/HusArmQS0FLebwEuAp02jxb11R+TIxGNBRlhNWbQ1RCmpjqE4ih2B/gJjE5EmZ2NM/x+ld8xi55D1Rw+WM2uHS4HfuMycBGI+BWoBW4CJ1Ki5y8t0dMd4VCnO9DPny3S25Onu7s33LOzyuLC6hoer6C+LkxvrwftymRiHOgDRjI5kACuA33pFwcHl7hw6Tc+X1bz2ezI0SVaWsqy3utKuF/ghl+BWuA2cDT14szMGmcu/sLnyzpFWfH5hDMXfzEzs5Z+qQq4DdT6FagE7gEHUy9evx1lcNA/QAGGBhcZGPSfgP3AvcRmKTfEV4Ajqdd+fItz7tw0oVDhLg+HNXp6pigunvnkSi1wwatAOXAH6Ei9ODS4yNWrc6yvO3nNt76u0dc3zZ07C+m/dgA3vY14K3AT+Gvher3O+fPT+HyF+fzPZ+P8+Wl0Xc+01A7c8CpQDtwF9qdf1HWdK1d+s7jo5PP3xUWDK1d+o2n+fVBSsK/x1gR1BZ5vADh11a98S42kFrjnPh0+Cvzfkr8BdZ/AhxCklJ0AAAAASUVORK5CYII="/>
+<title>PHC Pediatric Dose & Formulary</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+  
+  :root{
+    --bg-primary:#0a0f1e;
+    --bg-secondary:#0f1629;
+    --bg-card:#141d35;
+    --bg-elevated:#1a2442;
+    --text-primary:#e8f0ff;
+    --text-secondary:#9fb0d0;
+    --text-muted:#6b7a9a;
+    --accent:#4da3ff;
+    --accent-hover:#6bb5ff;
+    --accent-light:#e3f2ff;
+    --success:#16a34a;
+    --success-light:#dcfce7;
+    --warning:#f59e0b;
+    --warning-light:#fef3c7;
+    --danger:#ef4444;
+    --danger-light:#fee2e2;
+    --purple:#a855f7;
+    --border:#213055;
+    --border-light:#2a3f6d;
+    --shadow-sm:0 1px 2px 0 rgba(0,0,0,.15);
+    --shadow:0 4px 6px -1px rgba(0,0,0,.2), 0 2px 4px -2px rgba(0,0,0,.15);
+    --shadow-lg:0 10px 15px -3px rgba(0,0,0,.3), 0 4px 6px -4px rgba(0,0,0,.2);
+    --shadow-xl:0 20px 25px -5px rgba(0,0,0,.4), 0 8px 10px -6px rgba(0,0,0,.3);
+  }
+  
+  *{box-sizing:border-box;margin:0;padding:0}
+  
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:linear-gradient(135deg, #0a0f1e 0%, #0f1629 100%);
+    color:var(--text-primary);
+    -webkit-font-smoothing:antialiased;
+    -webkit-tap-highlight-color:transparent;
+    min-height:100vh;
+  }
+  
+  /* Header with glassmorphism */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(20,29,53,.85);
+    backdrop-filter:blur(20px) saturate(180%);
+    -webkit-backdrop-filter:blur(20px) saturate(180%);
+    border-bottom:1px solid rgba(77,163,255,.1);
+    padding:16px 20px;
+    box-shadow:0 4px 30px rgba(0,0,0,.3);
+  }
+  
+  h1{
+    font-size:20px;font-weight:900;line-height:1.3;
+    background:linear-gradient(135deg, #4da3ff 0%, #a855f7 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  
+  .subtitle{
+    margin-top:6px;font-size:12px;color:var(--text-muted);
+    font-weight:500;letter-spacing:0.3px;
+  }
+  
+  .wrap{
+    padding:16px 20px 100px;
+    max-width:1200px;
+    margin:0 auto;
+  }
+  
+  /* Modern glass cards */
+  .card{
+    background:rgba(20,29,53,.6);
+    backdrop-filter:blur(10px);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:20px;
+    margin:16px 0;
+    box-shadow:var(--shadow-lg);
+    transition:all .3s cubic-bezier(.4,0,.2,1);
+  }
+  
+  .card:hover{
+    border-color:var(--border-light);
+    box-shadow:var(--shadow-xl);
+    transform:translateY(-2px);
+  }
+  
+  /* Alert boxes with icons */
+  .warning-box, .alert-box, .info-box, .success-box{
+    border-radius:12px;
+    padding:14px 16px;
+    margin:12px 0;
+    font-size:13px;
+    line-height:1.6;
+    display:flex;
+    align-items:start;
+    gap:12px;
+    box-shadow:var(--shadow);
+  }
+  
+  .warning-box{
+    background:linear-gradient(135deg, rgba(245,158,11,.12) 0%, rgba(251,146,60,.08) 100%);
+    border:1px solid rgba(245,158,11,.3);
+  }
+  
+  .alert-box{
+    background:linear-gradient(135deg, rgba(239,68,68,.12) 0%, rgba(248,113,113,.08) 100%);
+    border:1px solid rgba(239,68,68,.3);
+  }
+  
+  .info-box{
+    background:linear-gradient(135deg, rgba(77,163,255,.12) 0%, rgba(168,85,247,.08) 100%);
+    border:1px solid rgba(77,163,255,.3);
+  }
+  
+  .success-box{
+    background:linear-gradient(135deg, rgba(22,163,74,.12) 0%, rgba(34,197,94,.08) 100%);
+    border:1px solid rgba(22,163,74,.3);
+  }
+  
+  .warning-box strong{color:var(--warning-light)}
+  .alert-box strong{color:var(--danger-light)}
+  .info-box strong{color:var(--accent-light)}
+  .success-box strong{color:var(--success-light)}
+  
+  /* Form inputs with neumorphism */
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  
+  .field{margin-bottom:12px}
+  .field label{
+    display:block;
+    font-size:11px;
+    font-weight:700;
+    color:var(--text-muted);
+    margin-bottom:8px;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+  }
+  
+  .field input, .field select{
+    width:100%;
+    padding:12px 16px;
+    border-radius:12px;
+    border:1.5px solid var(--border);
+    background:var(--bg-secondary);
+    color:var(--text-primary);
+    font-size:15px;
+    font-weight:600;
+    transition:all .3s cubic-bezier(.4,0,.2,1);
+    box-shadow:inset 0 2px 4px rgba(0,0,0,.2);
+  }
+  
+  .field input:focus, .field select:focus{
+    outline:none;
+    border-color:var(--accent);
+    box-shadow:0 0 0 4px rgba(77,163,255,.15), inset 0 2px 4px rgba(0,0,0,.2);
+    transform:translateY(-2px);
+  }
+  
+  .field select.male-selected{
+    border-color:#4da3ff;
+    box-shadow:0 0 0 3px rgba(77,163,255,.2);
+  }
+  
+  .field select.female-selected{
+    border-color:#ff69b4;
+    box-shadow:0 0 0 3px rgba(255,105,180,.2);
+  }
+  
+  /* Enhanced summary box */
+  .summary-box{
+    background:linear-gradient(135deg, rgba(77,163,255,.15) 0%, rgba(168,85,247,.1) 100%);
+    border:1.5px solid rgba(77,163,255,.3);
+    border-radius:12px;
+    padding:14px 18px;
+    font-size:14px;
+    font-weight:700;
+    box-shadow:var(--shadow);
+    transition:all .3s ease;
+  }
+  
+  .summary-box.male-theme{
+    background:linear-gradient(135deg, rgba(77,163,255,.18) 0%, rgba(96,165,250,.12) 100%);
+    border-color:rgba(77,163,255,.35);
+  }
+  
+  .summary-box.female-theme{
+    background:linear-gradient(135deg, rgba(255,105,180,.18) 0%, rgba(251,113,219,.12) 100%);
+    border-color:rgba(255,105,180,.35);
+  }
+  
+  .growth-summary{
+    background:linear-gradient(135deg, rgba(22,163,74,.12) 0%, rgba(34,197,94,.08) 100%);
+    border:1.5px solid rgba(22,163,74,.3);
+    border-radius:12px;
+    padding:14px 18px;
+    font-size:13px;
+    margin-top:12px;
+    line-height:1.7;
+    box-shadow:var(--shadow);
+  }
+  
+  /* Search bar with glow effect */
+  .search-container{
+    position:relative;
+    margin-bottom:16px;
+  }
+  
+  .search{
+    width:100%;
+    padding:14px 50px 14px 20px;
+    border-radius:14px;
+    border:1.5px solid var(--border);
+    background:var(--bg-secondary);
+    color:var(--text-primary);
+    font-size:15px;
+    font-weight:500;
+    transition:all .3s ease;
+    box-shadow:inset 0 2px 4px rgba(0,0,0,.2);
+  }
+  
+  .search:focus{
+    outline:none;
+    border-color:var(--accent);
+    box-shadow:0 0 0 4px rgba(77,163,255,.15),
+               0 0 20px rgba(77,163,255,.2),
+               inset 0 2px 4px rgba(0,0,0,.2);
+  }
+  
+  .search-icon{
+    position:absolute;
+    right:16px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--text-muted);
+    font-size:20px;
+  }
+  
+  /* Neumorphic buttons */
+  .btn{
+    background:linear-gradient(135deg, rgba(77,163,255,.2) 0%, rgba(77,163,255,.15) 100%);
+    border:1.5px solid rgba(77,163,255,.4);
+    color:var(--accent-light);
+    padding:10px 18px;
+    border-radius:12px;
+    font-size:13px;
+    font-weight:800;
+    cursor:pointer;
+    transition:all .3s cubic-bezier(.4,0,.2,1);
+    box-shadow:0 4px 6px rgba(0,0,0,.2),
+               inset 0 1px 0 rgba(255,255,255,.1);
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+  }
+  
+  .btn:hover{
+    background:linear-gradient(135deg, rgba(77,163,255,.3) 0%, rgba(77,163,255,.25) 100%);
+    border-color:rgba(77,163,255,.5);
+    box-shadow:0 6px 12px rgba(77,163,255,.3),
+               inset 0 1px 0 rgba(255,255,255,.15);
+    transform:translateY(-2px);
+  }
+  
+  .btn:active{
+    transform:translateY(0) scale(.98);
+    box-shadow:0 2px 4px rgba(0,0,0,.2),
+               inset 0 1px 0 rgba(255,255,255,.1);
+  }
+  
+  .btn-small{
+    padding:8px 14px;
+    font-size:11px;
+  }
+  
+  .action-bar{
+    display:flex;
+    gap:8px;
+    justify-content:flex-end;
+  }
+  
+  /* Enhanced category sections */
+  .category-section{
+    background:var(--bg-card);
+    border:1.5px solid var(--border);
+    border-radius:16px;
+    margin:16px 0;
+    overflow:hidden;
+    transition:all .3s ease;
+    box-shadow:var(--shadow);
+  }
+  
+  .category-section:hover{
+    border-color:var(--border-light);
+    box-shadow:var(--shadow-lg);
+  }
+  
+  .category-header{
+    padding:18px 20px;
+    cursor:pointer;
+    user-select:none;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:linear-gradient(135deg, rgba(77,163,255,.08) 0%, rgba(168,85,247,.05) 100%);
+    transition:all .3s ease;
+    border-bottom:1px solid transparent;
+  }
+  
+  .category-header:hover{
+    background:linear-gradient(135deg, rgba(77,163,255,.12) 0%, rgba(168,85,247,.08) 100%);
+  }
+  
+  .category-header.expanded{
+    background:linear-gradient(135deg, rgba(77,163,255,.15) 0%, rgba(168,85,247,.1) 100%);
+    border-bottom-color:var(--border);
+  }
+  
+  .category-title{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:15px;
+    font-weight:800;
+    color:var(--text-primary);
+  }
+  
+  .category-icon-badge{
+    width:36px;
+    height:36px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    background:linear-gradient(135deg, rgba(77,163,255,.2) 0%, rgba(168,85,247,.15) 100%);
+    border:1px solid rgba(77,163,255,.3);
+    box-shadow:var(--shadow-sm);
+  }
+  
+  .category-count{
+    font-size:11px;
+    padding:4px 10px;
+    border-radius:12px;
+    background:linear-gradient(135deg, rgba(77,163,255,.2) 0%, rgba(168,85,247,.15) 100%);
+    color:var(--accent-light);
+    font-weight:800;
+    border:1px solid rgba(77,163,255,.3);
+  }
+  
+  .category-expand-icon{
+    font-size:20px;
+    transition:transform .3s cubic-bezier(.4,0,.2,1);
+    display:inline-block;
+    color:var(--text-secondary);
+  }
+  
+  .category-header.expanded .category-expand-icon{
+    transform:rotate(180deg);
+  }
+  
+  .category-content{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s cubic-bezier(.4,0,.2,1);
+  }
+  
+  .category-content.expanded{
+    max-height:15000px;
+    transition:max-height .6s ease-in;
+  }
+  
+  /* Beautiful medication cards */
+  .med-card{
+    background:linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-card) 100%);
+    border:1.5px solid var(--border);
+    border-radius:14px;
+    padding:16px;
+    margin:12px;
+    cursor:pointer;
+    transition:all .3s cubic-bezier(.4,0,.2,1);
+    box-shadow:var(--shadow);
+    position:relative;
+  }
+  
+  .med-card::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    border-radius:14px;
+    padding:1.5px;
+    background:linear-gradient(135deg, transparent 0%, rgba(77,163,255,.2) 50%, transparent 100%);
+    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    opacity:0;
+    transition:opacity .3s ease;
+  }
+  
+  .med-card:hover{
+    border-color:rgba(77,163,255,.4);
+    box-shadow:0 8px 16px rgba(0,0,0,.3),
+               0 0 30px rgba(77,163,255,.15);
+    transform:translateY(-3px);
+  }
+  
+  .med-card:hover::before{
+    opacity:1;
+  }
+  
+  .med-card.expanded{
+    cursor:default;
+    border-color:rgba(77,163,255,.5);
+    background:linear-gradient(135deg, rgba(26,36,66,.9) 0%, rgba(20,29,53,.9) 100%);
+  }
+  
+  .med-compact{display:block}
+  .med-expanded{display:none}
+  .med-card.expanded .med-compact{display:none}
+  .med-card.expanded .med-expanded{display:block}
+  
+  .med-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+  }
+  
+  .med-name{
+    font-size:15px;
+    font-weight:900;
+    flex:1;
+    line-height:1.4;
+    color:var(--text-primary);
+  }
+  
+  .med-name-full{
+    font-size:17px;
+    font-weight:900;
+    margin-bottom:12px;
+    background:linear-gradient(135deg, #fff 0%, #e0f2fe 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  
+  /* Animated favorite button */
+  .favorite-btn{
+    font-size:20px;
+    cursor:pointer;
+    user-select:none;
+    transition:all .3s cubic-bezier(.4,0,.2,1);
+    filter:drop-shadow(0 2px 4px rgba(0,0,0,.3));
+  }
+  
+  .favorite-btn:hover{
+    transform:scale(1.3) rotate(15deg);
+  }
+  
+  .favorite-btn:active{
+    transform:scale(1.1);
+  }
+  
+  /* Status badges with glow */
+  .badge{
+    font-size:10px;
+    padding:5px 12px;
+    border-radius:10px;
+    display:inline-block;
+    font-weight:900;
+    white-space:nowrap;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    box-shadow:var(--shadow-sm);
+  }
+  
+  .b-good{
+    background:linear-gradient(135deg, rgba(22,163,74,.25) 0%, rgba(34,197,94,.2) 100%);
+    color:var(--success-light);
+    border:1px solid rgba(22,163,74,.5);
+    box-shadow:0 0 15px rgba(22,163,74,.3);
+  }
+  
+  .b-warn{
+    background:linear-gradient(135deg, rgba(245,158,11,.25) 0%, rgba(251,146,60,.2) 100%);
+    color:var(--warning-light);
+    border:1px solid rgba(245,158,11,.5);
+    box-shadow:0 0 15px rgba(245,158,11,.3);
+  }
+  
+  .b-bad{
+    background:linear-gradient(135deg, rgba(239,68,68,.25) 0%, rgba(248,113,113,.2) 100%);
+    color:var(--danger-light);
+    border:1px solid rgba(239,68,68,.5);
+    box-shadow:0 0 15px rgba(239,68,68,.3);
+  }
+  
+  /* Dose display with emphasis */
+  .dose-compact{
+    font-size:17px;
+    font-weight:900;
+    background:linear-gradient(135deg, #4da3ff 0%, #60a5fa 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    margin:8px 0;
+    letter-spacing:0.3px;
+  }
+  
+  .dose-display{
+    font-size:22px;
+    font-weight:900;
+    background:linear-gradient(135deg, #4da3ff 0%, #a855f7 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    margin:12px 0;
+    padding:12px;
+    border-radius:12px;
+    background-color:rgba(77,163,255,.08);
+    border:1px solid rgba(77,163,255,.2);
+    letter-spacing:0.5px;
+  }
+  
+  .ml-compact{
+    font-size:13px;
+    color:var(--accent-light);
+    font-weight:700;
+    margin:6px 0;
+    padding:4px 0;
+  }
+  
+  .ml-display{
+    font-size:15px;
+    color:var(--accent-light);
+    background:linear-gradient(135deg, rgba(77,163,255,.2) 0%, rgba(168,85,247,.15) 100%);
+    padding:10px 14px;
+    border-radius:10px;
+    display:inline-block;
+    margin:8px 0;
+    font-weight:800;
+    border:1px solid rgba(77,163,255,.3);
+    box-shadow:var(--shadow-sm);
+  }
+  
+  .freq-compact{
+    font-size:11px;
+    color:var(--text-muted);
+    margin-top:6px;
+    font-weight:500;
+  }
+  
+  .freq{
+    font-size:12px;
+    color:var(--text-secondary);
+    background:rgba(77,163,255,.1);
+    padding:6px 12px;
+    border-radius:8px;
+    display:inline-block;
+    margin:8px 0;
+    border:1px solid rgba(77,163,255,.2);
+    font-weight:600;
+  }
+  
+  .expand-hint{
+    font-size:11px;
+    color:var(--text-muted);
+    text-align:center;
+    margin-top:10px;
+    padding:8px;
+    border-top:1px solid var(--border);
+    font-weight:500;
+    letter-spacing:0.3px;
+  }
+  
+  /* Enhanced chips */
+  .chip{
+    font-size:11px;
+    color:var(--text-secondary);
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.03);
+    padding:6px 12px;
+    border-radius:10px;
+    font-weight:600;
+    box-shadow:var(--shadow-sm);
+  }
+  
+  .section-title{
+    font-size:11px;
+    font-weight:800;
+    color:var(--accent);
+    margin:16px 0 8px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+  }
+  
+  /* Form elements in expanded view */
+  .override-input, .conc-select{
+    width:100%;
+    padding:12px 16px;
+    border-radius:10px;
+    border:1.5px solid var(--border);
+    background:var(--bg-secondary);
+    color:var(--text-primary);
+    font-size:14px;
+    margin-top:8px;
+    font-weight:600;
+    transition:all .3s ease;
+  }
+  
+  .override-input:focus, .conc-select:focus{
+    outline:none;
+    border-color:var(--warning);
+    box-shadow:0 0 0 4px rgba(245,158,11,.15);
+  }
+  
+  .small{
+    font-size:10px;
+    color:var(--text-muted);
+    margin-top:6px;
+    font-weight:500;
+  }
+  
+  .ml-calculator{
+    background:linear-gradient(135deg, rgba(168,85,247,.12) 0%, rgba(192,132,252,.08) 100%);
+    border:1px solid rgba(168,85,247,.25);
+    border-radius:10px;
+    padding:12px;
+    margin:10px 0;
+    font-size:12px;
+    box-shadow:var(--shadow-sm);
+  }
+  
+  .ml-calculator strong{
+    color:var(--purple);
+  }
+  
+  .note{
+    color:var(--text-muted);
+    font-size:12px;
+    line-height:1.6;
+    margin-top:10px;
+    padding:12px;
+    background:rgba(0,0,0,.3);
+    border-radius:10px;
+    border:1px solid var(--border);
+  }
+  
+  .note strong{
+    color:var(--text-primary);
+  }
+  
+  /* Enhanced details/summary */
+  details{
+    margin-top:10px;
+    background:rgba(0,0,0,.25);
+    border-radius:10px;
+    padding:10px;
+    border:1px solid var(--border);
+    transition:all .3s ease;
+  }
+  
+  details summary{
+    cursor:pointer;
+    font-weight:700;
+    color:var(--text-primary);
+    font-size:12px;
+    padding:6px;
+    border-radius:8px;
+    transition:all .3s ease;
+  }
+  
+  details summary:hover{
+    background:rgba(77,163,255,.1);
+  }
+  
+  details[open] summary{
+    margin-bottom:10px;
+    color:var(--accent-light);
+  }
+  
+  details[open]{
+    background:rgba(77,163,255,.08);
+    border-color:rgba(77,163,255,.25);
+  }
+  
+  .collapse-btn{
+    width:100%;
+    margin-top:16px;
+    background:linear-gradient(135deg, rgba(77,163,255,.15) 0%, rgba(168,85,247,.1) 100%);
+    border:1.5px solid rgba(77,163,255,.3);
+  }
+  
+  .quick-actions{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+    flex-wrap:wrap;
+  }
+  
+  /* Modern modals */
+  .modal{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.9);
+    backdrop-filter:blur(10px);
+    z-index:1000;
+    align-items:center;
+    justify-content:center;
+  }
+  
+  .modal.active{
+    display:flex;
+    animation:fadeIn .3s ease;
+  }
+  
+  @keyframes fadeIn{
+    from{opacity:0}
+    to{opacity:1}
+  }
+  
+  .modal-content{
+    background:var(--bg-card);
+    border:1.5px solid var(--border-light);
+    border-radius:20px;
+    padding:24px;
+    max-width:500px;
+    width:90%;
+    max-height:80vh;
+    overflow-y:auto;
+    box-shadow:var(--shadow-xl);
+    animation:slideUp .3s cubic-bezier(.4,0,.2,1);
+  }
+  
+  @keyframes slideUp{
+    from{
+      opacity:0;
+      transform:translateY(50px);
+    }
+    to{
+      opacity:1;
+      transform:translateY(0);
+    }
+  }
+  
+  .modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+    padding-bottom:16px;
+    border-bottom:1px solid var(--border);
+  }
+  
+  .modal-close{
+    cursor:pointer;
+    font-size:28px;
+    color:var(--text-muted);
+    line-height:1;
+    transition:all .3s ease;
+    width:32px;
+    height:32px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:8px;
+  }
+  
+  .modal-close:hover{
+    color:var(--danger);
+    background:rgba(239,68,68,.1);
+    transform:rotate(90deg);
+  }
+  
+  .history-item{
+    background:rgba(77,163,255,.08);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:14px;
+    margin:10px 0;
+    font-size:12px;
+    transition:all .3s ease;
+    box-shadow:var(--shadow-sm);
+  }
+  
+  .history-item:hover{
+    background:rgba(77,163,255,.12);
+    border-color:rgba(77,163,255,.3);
+    transform:translateX(4px);
+  }
+  
+  .history-item strong{
+    color:var(--accent);
+  }
+  
+  .history-time{
+    color:var(--text-muted);
+    font-size:10px;
+    font-weight:600;
+  }
+  
+  /* Install banner */
+  .install-banner{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:linear-gradient(135deg, rgba(20,29,53,.95) 0%, rgba(15,22,41,.95) 100%);
+    backdrop-filter:blur(20px);
+    border-top:2px solid var(--accent);
+    padding:16px 20px;
+    z-index:200;
+    transform:translateY(100%);
+    transition:transform .4s cubic-bezier(.4,0,.2,1);
+    box-shadow:0 -8px 32px rgba(0,0,0,.4);
+  }
+  
+  .install-banner.show{
+    transform:translateY(0);
+  }
+  
+  .install-banner-content{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    max-width:1200px;
+    margin:0 auto;
+  }
+  
+  footer{
+    padding:24px;
+    color:var(--text-muted);
+    font-size:11px;
+    line-height:1.7;
+    text-align:center;
+    border-top:1px solid var(--border);
+    margin-top:32px;
+    font-weight:500;
+  }
+  
+  /* Responsive */
+  @media (max-width:640px){
+    .grid, .grid-3{
+      grid-template-columns:1fr;
+    }
+    
+    h1{
+      font-size:18px;
+    }
+    
+    .category-title{
+      font-size:14px;
+    }
+    
+    .med-card{
+      padding:14px;
+      margin:10px;
+    }
+    
+    .install-banner-content{
+      flex-direction:column;
+      align-items:stretch;
+    }
+  }
+  
+  /* Print styles */
+  @media print{
+    body{
+      background:#fff;
+      color:#000;
+    }
+    .btn, .search, .modal, .expand-hint, .install-banner, .favorite-btn{
+      display:none!important;
+    }
+    .med-compact{
+      display:none!important;
+    }
+    .med-expanded{
+      display:block!important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏥 PHC Pediatric Dose & Formulary</h1>
+  <p class="subtitle">Saudi Growth Charts • Offline PWA • Professional Medical Reference</p>
+</header>
+
+<div class="wrap">
+  <div class="warning-box">
+    <span style="font-size:24px">⚠️</span>
+    <div>
+      <strong>For Healthcare Professionals Only</strong><br>
+      Always verify against local protocols, check drug interactions, renal/hepatic adjustments, and maximum daily doses.
+    </div>
+  </div>
+
+  <div id="growthAlert"></div>
+
+  <div class="card">
+    <div class="grid-3">
+      <div class="field">
+        <label>Age (years)</label>
+        <input id="ageYears" type="number" min="0" max="18" step="1" value="6" inputmode="numeric"/>
+      </div>
+      <div class="field">
+        <label>+ Months</label>
+        <input id="ageMonths" type="number" min="0" max="11" step="1" value="0" inputmode="numeric"/>
+      </div>
+      <div class="field">
+        <label>Sex</label>
+        <select id="sex">
+          <option value="">Not specified</option>
+          <option value="male">👦 Male</option>
+          <option value="female">👧 Female</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:12px;">
+      <div class="field">
+        <label>Weight (kg) *Required</label>
+        <input id="weight" type="number" min="0" max="150" step="0.1" value="35" inputmode="decimal"/>
+      </div>
+      <div class="field">
+        <label>Height (cm)</label>
+        <input id="height" type="number" min="0" max="200" step="0.1" value="122" inputmode="decimal" placeholder="Optional for BMI"/>
+      </div>
+    </div>
+
+    <div class="summary-box" style="margin-top:16px;" id="ageSummary">—</div>
+    <div id="growthSummary"></div>
+  </div>
+
+  <div class="card">
+    <div class="search-container">
+      <input class="search" id="searchBox" placeholder="Search medication or indication..." autocomplete="off"/>
+      <span class="search-icon">🔍</span>
+    </div>
+    <div class="action-bar">
+      <button class="btn btn-small" id="favoritesBtn">⭐ Favorites</button>
+      <button class="btn btn-small" id="historyBtn">📋 History</button>
+    </div>
+  </div>
+
+  <div id="categoriesContainer"></div>
+
+  <footer id="footerText">
+    <strong>Saudi Edition PWA by Aljarrah</strong><br>
+    Saudi Growth Charts (El Mouzan 2005) • Lexicomp • BNFC<br>
+    <small style="opacity:0.7">pediacal.netlify.app</small>
+  </footer>
+</div>
+
+<!-- Install Banner -->
+<div class="install-banner" id="installBanner">
+  <div class="install-banner-content">
+    <div>
+      <strong style="font-size:14px">📱 Install App for Offline Access</strong><br>
+      <small>Add to home screen to use without internet</small>
+    </div>
+    <div style="display:flex;gap:10px">
+      <button class="btn btn-small" id="installBtn">Install Now</button>
+      <button class="btn btn-small" id="dismissInstall" style="background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.4)">Not Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- History Modal -->
+<div class="modal" id="historyModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 style="margin:0;font-size:18px;font-weight:800">📋 Calculation History</h2>
+      <span class="modal-close" id="closeHistory">×</span>
+    </div>
+    <div id="historyContent"></div>
+    <button class="btn" style="width:100%;margin-top:16px" id="clearHistory">Clear All History</button>
+  </div>
+</div>
+
+<!-- Favorites Modal -->
+<div class="modal" id="favoritesModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 style="margin:0;font-size:18px;font-weight:800">⭐ Favorite Medications</h2>
+      <span class="modal-close" id="closeFavorites">×</span>
+    </div>
+    <div id="favoritesContent"></div>
+  </div>
+</div>
+
+<script>
+// PWA Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').then(reg => {
+      console.log('✅ SW registered:', reg);
+    }).catch(err => console.log('❌ SW failed:', err));
+  });
+}
+
+// Install prompt
+let deferredPrompt;
+const installBanner = document.getElementById('installBanner');
+const installBtn = document.getElementById('installBtn');
+const dismissInstall = document.getElementById('dismissInstall');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  if (!localStorage.getItem('installDismissed')) {
+    setTimeout(() => installBanner.classList.add('show'), 3000);
+  }
+});
+
+installBtn.addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  deferredPrompt = null;
+  installBanner.classList.remove('show');
+});
+
+dismissInstall.addEventListener('click', () => {
+  installBanner.classList.remove('show');
+  localStorage.setItem('installDismissed', 'true');
+});
+
+// Manifest
+const manifest = {
+  name: "PHC Pediatric Dose & Formulary",
+  short_name: "PHC Pediatric",
+  description: "Pediatric dosing with Saudi growth charts",
+  start_url: ".",
+  display: "standalone",
+  background_color: "#0a0f1e",
+  theme_color: "#4da3ff",
+  orientation: "portrait",
+  icons: [{
+    src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAsQAAALEBxi1JjQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAKcSURBVFiFvZdNaBNBGIaf2U2apJu0aZPGNKlNqz8x1R8UQRBB8OBBEDx4UPDgQRA8eBDEk6AHxYMHQfDgQRA8eBDEk4iCB8GDSW2sjW3S/GybNJvd2Rkdkm422WQ3TfvCwu7sMN/zzTczO/MtiAhbGbI1zQDYB+wH9gI1QDWQABaBOeAN8Bp4BkxsRYEtgbcDh4HDwAGgIst7k8Bj4CHwCFjJdLOlBRqBU8ApoKKA9y8DJ4FrQCqdQUIBJ+sFhoBjQGkB75cCx4Gh1Dl6MwksBs5Rgw9CL3AC6AfOu28qKeDXYOODRw3QD5wHYqkXFRJ4b+ODB48a4CvwJvVi2ipoN3DV5u2JEu1/HusArmQS0FLebwEuAp02jxb11R+TIxGNBRlhNWbQ1RCmpjqE4ih2B/gJjE5EmZ2NM/x+ld8xi55D1Rw+WM2uHS4HfuMycBGI+BWoBW4CJ1Ki5y8t0dMd4VCnO9DPny3S25Onu7s33LOzyuLC6hoer6C+LkxvrwftymRiHOgDRjI5kACuA33pFwcHl7hw6Tc+X1bz2ezI0SVaWsqy3utKuF/ghl+BWuA2cDT14szMGmcu/sLnyzpFWfH5hDMXfzEzs5Z+qQq4DdT6FagE7gEHUy9evx1lcNA/QAGGBhcZGPSfgP3AvcRmKTfEV4Ajqdd+fItz7tw0oVDhLg+HNXp6pigunvnkSi1wwatAOXAH6Ei9ODS4yNWrc6yvO3nNt76u0dc3zZ07C+m/dgA3vY14K3AT+Gvher3O+fPT+HyF+fzPZ+P8+Wl0Xc+01A7c8CpQDtwF9qdf1HWdK1d+s7jo5PP3xUWDK1d+o2n+fVBSsK/x1gR1BZ5vADh11a98S42kFrjnPh0+Cvzfkr8BdZ/AhxCklJ0AAAAASUVORK5CYII=",
+    sizes: "512x512",
+    type: "image/png"
+  }]
+};
+const manifestBlob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
+const manifestURL = URL.createObjectURL(manifestBlob);
+document.getElementById('manifest-placeholder').setAttribute('href', manifestURL);
+
+// Saudi Growth Data
+const SAUDI_GROWTH = {
+  male: {
+    wt_0_60: {
+      0:{p3:2.5,p5:2.7,p10:2.9,p25:3.2,p50:3.5,p75:3.9,p90:4.1,p95:4.3,p97:4.5},
+      6:{p3:6.0,p5:6.3,p10:6.6,p25:7.2,p50:7.8,p75:8.5,p90:9.1,p95:9.5,p97:9.8},
+      12:{p3:7.8,p5:8.2,p10:8.6,p25:9.4,p50:10.3,p75:11.1,p90:12.0,p95:12.5,p97:12.9},
+      24:{p3:10.0,p5:10.5,p10:11.0,p25:12.0,p50:13.1,p75:14.2,p90:15.3,p95:15.9,p97:16.5},
+      36:{p3:11.5,p5:12.1,p10:12.7,p25:13.9,p50:15.2,p75:16.4,p90:17.8,p95:18.5,p97:19.2},
+      48:{p3:13.0,p5:13.6,p10:14.3,p25:15.7,p50:17.2,p75:18.7,p90:20.2,p95:21.0,p97:21.8},
+      60:{p3:14.5,p5:15.2,p10:16.0,p25:17.5,p50:19.2,p75:20.9,p90:22.6,p95:23.5,p97:24.4}
+    },
+    wt_5_19: {
+      72:{p3:16.0,p5:17.0,p10:18.0,p25:19.8,p50:21.8,p75:24.0,p90:26.0,p95:27.1,p97:28.2},
+      96:{p3:19.2,p5:20.5,p10:22.0,p25:24.6,p50:27.4,p75:30.4,p90:33.5,p95:35.0,p97:36.6},
+      120:{p3:23.0,p5:24.8,p10:26.8,p25:30.3,p50:34.2,p75:38.4,p90:42.8,p95:45.1,p97:47.5},
+      144:{p3:28.5,p5:31.0,p10:34.0,p25:39.0,p50:44.5,p75:50.8,p90:57.5,p95:61.0,p97:64.5},
+      168:{p3:37.5,p5:41.0,p10:45.2,p25:52.0,p50:59.0,p75:67.0,p90:75.5,p95:80.0,p97:84.5},
+      192:{p3:48.0,p5:52.0,p10:57.0,p25:64.5,p50:72.5,p75:80.5,p90:88.0,p95:92.0,p97:96.0},
+      216:{p3:55.0,p5:59.0,p10:64.0,p25:71.0,p50:79.0,p75:86.0,p90:93.0,p95:96.8,p97:100.5}
+    },
+    ht_0_60: {
+      0:{p3:46,p5:47,p10:48,p25:49,p50:50,p75:51,p90:52,p95:53,p97:54},
+      6:{p3:62,p5:63,p10:65,p25:67,p50:69,p75:71,p90:73,p95:74,p97:75},
+      12:{p3:71,p5:72,p10:74,p25:76,p50:79,p75:81,p90:84,p95:85,p97:87},
+      24:{p3:82,p5:84,p10:86,p25:89,p50:93,p75:96,p90:99,p95:101,p97:103},
+      36:{p3:89,p5:91,p10:94,p25:97,p50:101,p75:104,p90:108,p95:110,p97:112},
+      48:{p3:96,p5:98,p10:101,p25:105,p50:109,p75:112,p90:116,p95:118,p97:120},
+      60:{p3:102,p5:104,p10:107,p25:111,p50:115,p75:118,p90:122,p95:124,p97:127}
+    },
+    ht_5_19: {
+      72:{p3:108,p5:110,p10:113,p25:117,p50:121,p75:125,p90:129,p95:131,p97:133},
+      96:{p3:118,p5:121,p10:124,p25:128,p50:133,p75:138,p90:142,p95:144,p97:147},
+      120:{p3:129,p5:132,p10:136,p25:141,p50:147,p75:152,p90:157,p95:160,p97:163},
+      144:{p3:143,p5:147,p10:152,p25:158,p50:164,p75:169,p90:175,p95:178,p97:181},
+      168:{p3:160,p5:164,p10:168,p25:173,p50:178,p75:183,p90:187,p95:189,p97:192},
+      192:{p3:168,p5:171,p10:174,p25:178,p50:183,p75:187,p90:191,p95:193,p97:195},
+      216:{p3:170,p5:173,p10:176,p25:180,p50:184,p75:188,p90:191,p95:193,p97:195}
+    }
+  },
+  female: {
+    wt_0_60: {
+      0:{p3:2.4,p5:2.6,p10:2.8,p25:3.1,p50:3.4,p75:3.7,p90:4.0,p95:4.2,p97:4.4},
+      6:{p3:5.5,p5:5.8,p10:6.1,p25:6.7,p50:7.3,p75:7.9,p90:8.6,p95:8.9,p97:9.3},
+      12:{p3:7.3,p5:7.7,p10:8.1,p25:8.9,p50:9.7,p75:10.5,p90:11.4,p95:11.8,p97:12.3},
+      24:{p3:9.5,p5:10.0,p10:10.5,p25:11.5,p50:12.6,p75:13.7,p90:14.8,p95:15.4,p97:16.0},
+      36:{p3:11.0,p5:11.5,p10:12.1,p25:13.3,p50:14.6,p75:15.9,p90:17.2,p95:17.9,p97:18.6},
+      48:{p3:12.5,p5:13.1,p10:13.7,p25:15.1,p50:16.5,p75:18.0,p90:19.5,p95:20.3,p97:21.1},
+      60:{p3:14.0,p5:14.6,p10:15.3,p25:16.8,p50:18.4,p75:20.1,p90:21.8,p95:22.7,p97:23.6}
+    },
+    wt_5_19: {
+      72:{p3:15.5,p5:16.3,p10:17.2,p25:19.0,p50:20.9,p75:22.9,p90:25.0,p95:26.1,p97:27.2},
+      96:{p3:18.7,p5:20.0,p10:21.3,p25:23.8,p50:26.6,p75:29.5,p90:32.5,p95:34.1,p97:35.8},
+      120:{p3:22.8,p5:24.6,p10:26.6,p25:30.2,p50:34.2,p75:38.5,p90:43.0,p95:45.5,p97:48.0},
+      144:{p3:29.0,p5:31.8,p10:34.8,p25:40.1,p50:46.0,p75:52.0,p90:58.0,p95:61.4,p97:64.8},
+      168:{p3:38.5,p5:42.0,p10:46.2,p25:52.0,p50:58.5,p75:64.0,p90:69.5,p95:72.2,p97:75.0},
+      192:{p3:45.5,p5:49.0,p10:53.0,p25:58.0,p50:64.0,p75:69.0,p90:74.0,p95:76.5,p97:79.0},
+      216:{p3:48.5,p5:52.0,p10:55.5,p25:60.5,p50:66.5,p75:71.5,p90:76.0,p95:78.5,p97:81.0}
+    },
+    ht_0_60: {
+      0:{p3:45,p5:46,p10:47,p25:48,p50:49,p75:50,p90:51,p95:52,p97:53},
+      6:{p3:61,p5:62,p10:64,p25:66,p50:68,p75:70,p90:72,p95:73,p97:74},
+      12:{p3:70,p5:71,p10:73,p25:75,p50:78,p75:80,p90:83,p95:84,p97:86},
+      24:{p3:81,p5:83,p10:85,p25:88,p50:92,p75:95,p90:98,p95:100,p97:102},
+      36:{p3:88,p5:90,p10:93,p25:96,p50:100,p75:103,p90:107,p95:109,p97:111},
+      48:{p3:95,p5:97,p10:100,p25:104,p50:108,p75:111,p90:115,p95:117,p97:119},
+      60:{p3:101,p5:103,p10:106,p25:110,p50:114,p75:117,p90:121,p95:123,p97:126}
+    },
+    ht_5_19: {
+      72:{p3:107,p5:109,p10:112,p25:116,p50:120,p75:124,p90:128,p95:130,p97:132},
+      96:{p3:118,p5:121,p10:124,p25:128,p50:133,p75:138,p90:142,p95:145,p97:147},
+      120:{p3:131,p5:134,p10:138,p25:143,p50:149,p75:154,p90:159,p95:162,p97:165},
+      144:{p3:146,p5:149,p10:153,p25:158,p50:164,p75:169,p90:173,p95:175,p97:177},
+      168:{p3:154,p5:157,p10:160,p25:164,p50:169,p75:173,p90:176,p95:178,p97:181},
+      192:{p3:156,p5:159,p10:162,p25:166,p50:170,p75:174,p90:177,p95:179,p97:181},
+      216:{p3:157,p5:160,p10:163,p25:167,p50:171,p75:175,p90:178,p95:180,p97:182}
+    }
+  }
+};
+
+const CATEGORIES = ["Emergency","Asthma","Antihistamines","ENT","GI","Antibiotics","Pain/Fever","NSAIDs","Supplements"];
+
+const CATEGORY_ICONS = {
+  "Emergency": "🚨",
+  "Asthma": "💨",
+  "Antihistamines": "🤧",
+  "ENT": "👂",
+  "GI": "🏥",
+  "Antibiotics": "💊",
+  "Pain/Fever": "🌡️",
+  "NSAIDs": "⚕️",
+  "Supplements": "💊"
+};
+
+const MEDS = [
+  {id:"epi_im",cat:"Emergency",name:"Epinephrine IM",shortName:"Adrenaline IM",common:["1 mg/mL"],indications:"Anaphylaxis IM",contraindications:"None in emergency",method:"epi_mgkg",min_m:0,max_m:216,freq:"q5-15min PRN",notes:"0.01 mg/kg IM (max 0.5 mg)",clinicalTips:"IM anterolateral thigh. Have 2nd dose ready. Monitor rebound. Call EMS.",concentrations:[{label:"1 mg/mL",mg_per_ml:1}]},
+  {id:"dex_croup",cat:"Emergency",name:"Dexamethasone",shortName:"Dexamethasone",common:["4 mg/mL inj"],indications:"Croup",contraindications:"Fungal infection",method:"dex_croup",min_m:0,max_m:216,freq:"Single dose",notes:"0.15-0.6 mg/kg (max 10 mg)",clinicalTips:"PO/IM/IV. Lasts 24-72h.",concentrations:[{label:"4 mg/mL",mg_per_ml:4}]},
+  
+  {id:"salb_neb",cat:"Asthma",name:"Salbutamol Nebulizer",shortName:"Salbutamol Neb",common:["5 mg/mL"],indications:"Moderate-severe wheeze, asthma",contraindications:"Hypersensitivity",method:"salb_neb_weight",min_m:0,max_m:216,freq:"q20min x3 doses PRN",notes:"Weight-based: 0.15 mg/kg/dose (min 2.5 mg, max 5 mg)",clinicalTips:"⚠️ Monitor HR. Reassess after 3 doses. Dilute with 2-4 mL NS. Can repeat q20min x3.",sideEffects:"Tachycardia, tremor, hypokalemia",concentrations:[{label:"5 mg/mL (1 mL = 5 mg)",mg_per_ml:5}]},
+  {id:"salb_mdi",cat:"Asthma",name:"Salbutamol MDI",shortName:"Salbutamol MDI",common:["100 mcg/puff"],indications:"Mild-moderate wheeze",contraindications:"Hypersensitivity",method:"salb_mdi_age",min_m:0,max_m:216,freq:"PRN q4-6h",notes:"Age-based puffs with spacer",clinicalTips:"Use spacer. Shake before use. 2-6 puffs depending on age/severity."},
+  {id:"ipra",cat:"Asthma",name:"Ipratropium Neb",shortName:"Ipratropium",common:["250/500 mcg"],indications:"Severe asthma add-on",contraindications:"Atropine allergy",method:"ipra_neb_age",min_m:0,max_m:216,freq:"q20min x3",notes:"<6y:250mcg; ≥6y:500mcg",clinicalTips:"Mix with salbutamol in same neb."},
+  {id:"pred",cat:"Asthma",name:"Prednisolone",shortName:"Prednisolone",common:["5 mg/5 mL"],indications:"Asthma exacerbation",contraindications:"Fungal infection",method:"pred_mgkg",min_m:0,max_m:216,freq:"Daily x3-5d",notes:"1-2 mg/kg/day (max 40 mg)",clinicalTips:"Give with food. No taper if <7 days.",concentrations:[{label:"5 mg/5 mL (1 mg/mL)",mg_per_ml:1}]},
+  {id:"montel",cat:"Asthma",name:"Montelukast",shortName:"Montelukast",common:["4/5/10 mg"],indications:"Asthma controller",contraindications:"Hypersensitivity",method:"montelukast_age",min_m:6,max_m:216,freq:"Daily (evening)",notes:"Age-based dosing",clinicalTips:"Bedtime. Counsel re: neuropsych effects."},
+  
+  {id:"cetir",cat:"Antihistamines",name:"Cetirizine",shortName:"Cetirizine",common:["5 mg/5 mL"],indications:"Allergic rhinitis, urticaria",contraindications:"Hypersensitivity",method:"cetirizine_age",min_m:6,max_m:216,freq:"Once daily",notes:"Age-based",clinicalTips:"Less sedating. Adjust in renal impairment.",concentrations:[{label:"5 mg/5 mL (1 mg/mL)",mg_per_ml:1}]},
+  {id:"lorat",cat:"Antihistamines",name:"Loratadine",shortName:"Loratadine",common:["5 mg/5 mL"],indications:"Allergic rhinitis",contraindications:"Hypersensitivity",method:"loratadine_age",min_m:24,max_m:216,freq:"Once daily",notes:"2-5y:5mg; ≥6y:10mg",clinicalTips:"Non-sedating.",concentrations:[{label:"5 mg/5 mL (1 mg/mL)",mg_per_ml:1}]},
+  {id:"chlor",cat:"Antihistamines",name:"Chlorpheniramine",shortName:"Chlorpheniramine",common:["2 mg/5 mL"],indications:"Allergic symptoms",contraindications:"Neonates, MAOI",method:"chlorphen_weight",min_m:24,max_m:216,freq:"q6-8h PRN",notes:"~0.1 mg/kg/dose (max 4 mg)",clinicalTips:"⚠️ Sedating. Anticholinergic effects.",sideEffects:"Sedation, dry mouth.",concentrations:[{label:"2 mg/5 mL (0.4 mg/mL)",mg_per_ml:0.4}]},
+  
+  {id:"mome",cat:"ENT",name:"Mometasone Nasal",shortName:"Mometasone Nasal",common:["50 mcg/spray"],indications:"Allergic rhinitis",contraindications:"Nasal infection",method:"fixed_text",min_m:24,max_m:216,freq:"Daily",fixed:"2-11y:1 spray/nostril daily; ≥12y:2 sprays/nostril daily",notes:"Intranasal steroid",clinicalTips:"Aim away from septum. Takes days for full effect."},
+  
+  {id:"ondans",cat:"GI",name:"Ondansetron",shortName:"Ondansetron",common:["4 mg ODT, 8 mg ODT"],indications:"AGE vomiting",contraindications:"Long QT",method:"ondansetron_AGE_weight",min_m:6,max_m:216,freq:"Single dose",notes:"Wt-based: 8-15kg→2mg; 15-30kg→4mg; >30kg→8mg",clinicalTips:"ODT dissolves on tongue. Encourage rehydration after.",concentrations:[{label:"4 mg/5 mL (0.8 mg/mL)",mg_per_ml:0.8}]},
+  {id:"omep",cat:"GI",name:"Omeprazole",shortName:"Omeprazole",common:["10/20 mg caps"],indications:"GERD",contraindications:"Hypersensitivity",method:"omeprazole_mgkg",min_m:1,max_m:216,freq:"Once daily",notes:"~1 mg/kg/day (max 40 mg)",clinicalTips:"Before breakfast. Review indication regularly."},
+  {id:"lact",cat:"GI",name:"Lactulose",shortName:"Lactulose",common:["10 g/15 mL (667 mg/mL)"],indications:"Constipation",contraindications:"Galactose intolerance",method:"lactulose_age",min_m:6,max_m:216,freq:"Daily-BID",notes:"Age-based dosing",clinicalTips:"Reduce if diarrhea. Takes 24-48h. Increase fluids.",concentrations:[{label:"10 g/15 mL syrup",mg_per_ml:667}]},
+  
+  {id:"amox",cat:"Antibiotics",name:"Amoxicillin",shortName:"Amoxicillin",common:["125/250 mg/5 mL"],indications:"AOM, pharyngitis, pneumonia",contraindications:"PCN allergy",method:"mgkg_single",mgkg:15,min_m:0,max_m:216,max_mg:1000,freq:"q8h",notes:"15 mg/kg/dose q8h",clinicalTips:"⚠️ Shake well. Refrigerate. Complete course. EBV→rash.",sideEffects:"Diarrhea, rash.",concentrations:[{label:"125 mg/5 mL (25 mg/mL)",mg_per_ml:25},{label:"250 mg/5 mL (50 mg/mL)",mg_per_ml:50}]},
+  {id:"amoxclav",cat:"Antibiotics",name:"Co-amoxiclav",shortName:"Co-amoxiclav",common:["125/31 mg/5 mL"],indications:"Sinusitis, bites",contraindications:"PCN allergy, prior jaundice",method:"mgkg_single",mgkg:15,min_m:0,max_m:216,max_mg:875,freq:"q8-12h",notes:"Dose on amox component",clinicalTips:"With food. More diarrhea than amox alone.",sideEffects:"Diarrhea (common).",concentrations:[{label:"125/31 mg/5 mL (amox 25 mg/mL)",mg_per_ml:25}]},
+  {id:"azith",cat:"Antibiotics",name:"Azithromycin",shortName:"Azithromycin",common:["200 mg/5 mL"],indications:"Atypical pneumonia, pertussis, GAS pharyngitis",contraindications:"Macrolide allergy",method:"azithro_3day",min_m:6,max_m:216,max_mg:500,freq:"Daily x3d",notes:"10 mg/kg/day x3 days (max 500 mg/day)",clinicalTips:"⚠️ QT risk with other QT drugs. Can take with/without food.",sideEffects:"Diarrhea, QT prolongation.",concentrations:[{label:"200 mg/5 mL (40 mg/mL)",mg_per_ml:40}]},
+  {id:"metro",cat:"Antibiotics",name:"Metronidazole",shortName:"Metronidazole",common:["125 mg/5 mL"],indications:"Giardiasis, anaerobes",contraindications:"Hypersensitivity",method:"mgkg_single",mgkg:7.5,min_m:0,max_m:216,max_mg:500,freq:"q8h",notes:"7.5 mg/kg/dose q8h",clinicalTips:"Avoid alcohol 48h after. Metallic taste.",sideEffects:"Metallic taste, disulfiram rxn.",concentrations:[{label:"125 mg/5 mL (25 mg/mL)",mg_per_ml:25}]},
+  
+  {id:"paracet",cat:"Pain/Fever",name:"Paracetamol Syrup",shortName:"Paracetamol",common:["120/160 mg/5 mL"],indications:"Fever, pain",contraindications:"Severe hepatic impairment",method:"mgkg_range",mgkg_low:10,mgkg_high:15,min_m:0,max_m:216,max_mg:1000,maxDailyMgKg:75,freq:"q4-6h PRN (max 4/day)",notes:"10-15 mg/kg/dose. Max 75 mg/kg/day or 4g/day",clinicalTips:"⚠️ Check other products for paracetamol. Overdose→hepatotoxicity.",sideEffects:"Overdose: liver failure.",concentrations:[{label:"120 mg/5 mL (24 mg/mL)",mg_per_ml:24},{label:"160 mg/5 mL (32 mg/mL)",mg_per_ml:32}]},
+  {id:"para_drops",cat:"Pain/Fever",name:"Paracetamol Drops",shortName:"Paracetamol Drops",common:["100 mg/mL"],indications:"Fever, pain (infants)",contraindications:"Severe hepatic impairment",method:"mgkg_range",mgkg_low:10,mgkg_high:15,min_m:0,max_m:216,max_mg:1000,maxDailyMgKg:75,freq:"q4-6h PRN",notes:"⚠️ HIGH CONCENTRATION - 100 mg/mL",clinicalTips:"⚠️⚠️ DOSING ERROR RISK! Use calibrated dropper only. Double-check dose.",concentrations:[{label:"100 mg/mL drops",mg_per_ml:100}]},
+  {id:"ibu",cat:"Pain/Fever",name:"Ibuprofen",shortName:"Ibuprofen",common:["100 mg/5 mL"],indications:"Fever, pain, inflammation",contraindications:"GI bleed, severe renal impairment, NSAID allergy, <6mo",method:"mgkg_single",mgkg:10,min_m:6,max_m:216,max_mg:600,maxDailyMgKg:40,freq:"q6-8h PRN",notes:"10 mg/kg/dose q6-8h. Max 40 mg/kg/day or 2.4g/day. Avoid <6mo.",clinicalTips:"✓ Check hydration status. With food if GI upset.",sideEffects:"GI upset, renal impairment.",concentrations:[{label:"100 mg/5 mL (20 mg/mL)",mg_per_ml:20}]},
+  
+  {id:"diclo",cat:"NSAIDs",name:"Diclofenac",shortName:"Diclofenac",common:["25/50 mg tabs"],indications:"Inflammatory pain",contraindications:"GI ulcer, NSAID allergy",method:"diclo_mgkg",min_m:72,max_m:216,freq:"BID-TID",notes:"1.5-2.5 mg/kg/day divided BID-TID (max 150 mg/day)",clinicalTips:"⚠️ With food. Higher GI toxicity than ibuprofen.",sideEffects:"GI bleeding, renal issues."},
+  
+  {id:"domperidone",cat:"GI",name:"Domperidone",shortName:"Domperidone",common:["1 mg/mL suspension"],indications:"GERD (specialist use), nausea/vomiting (≥12y, ≥35kg)",contraindications:"Cardiac disease, QT prolongation, GI obstruction, prolactinoma, age <12y or <35kg for nausea/vomiting",method:"domperidone_gerd",min_m:0,max_m:216,freq:"TID (3 times daily)",notes:"GERD: 250-400 mcg/kg TID. Nausea (≥12y, ≥35kg): 10mg TID max 1 week",clinicalTips:"⚠️ CARDIAC RISK: Monitor for arrhythmia, QT prolongation. Avoid in cardiac disease. Take 30-60 min before meals. Not recommended <12y for nausea.",sideEffects:"QT prolongation, arrhythmia, sudden cardiac death, extrapyramidal effects, hyperprolactinemia",concentrations:[{label:"1 mg/mL suspension", mg_per_ml:1}]},
+  
+  {id:"diclo_supp",cat:"Pain/Fever",name:"Diclofenac Suppository",shortName:"Diclofenac Supp",common:["12.5 mg, 25 mg, 50 mg suppositories"],indications:"Postoperative pain, inflammation, mild-moderate pain",contraindications:"GI bleeding, GI ulcer, NSAID allergy, proctitis, cardiac disease, <6 months",method:"diclo_supp_postop",min_m:6,max_m:216,freq:"BID-TID PRN (max 4 days postop)",notes:"Postop: 8-11kg: 12.5mg BID; ≥12kg: 1mg/kg TID (max 50mg/dose). Pain/inflammation: 0.3-1mg/kg TID",clinicalTips:"⚠️ Moisten suppository with water before insertion. Max 4 days for postop pain. Check hydration. Avoid in proctitis.",sideEffects:"GI bleeding, renal impairment, CV events, bronchospasm",maxDailyMgKg:3},
+  
+  {id:"iron_ferric",cat:"Supplements",name:"Iron Ferric Hydroxide Polymaltose",shortName:"Iron Supplement",common:["10 mg/mL syrup"],indications:"Iron deficiency anemia, prevention in at-risk children",contraindications:"Hemochromatosis, hemosiderosis, non-iron deficiency anemia",method:"iron_elemental_mgkg",min_m:0,max_m:216,freq:"Once daily or divided BID",notes:"Treatment: 3-6 mg elemental iron/kg/day. Prevention: 1-2 mg/kg/day",clinicalTips:"💡 Give with vitamin C (orange juice) for better absorption. Can cause dark stools (normal). Give on empty stomach if tolerated, or with food if GI upset. Avoid with dairy/tea/coffee.",sideEffects:"GI upset, constipation, dark stools, teeth staining (rinse after)",concentrations:[{label:"10 mg/mL (elemental iron)", mg_per_ml:10}]}
+];
+
+let doseHistory = JSON.parse(localStorage.getItem('doseHistory') || '[]');
+let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+let expandedCategories = JSON.parse(localStorage.getItem('expandedCategories') || '[]');
+
+function getClosestAge(ageM, data) {
+  const ages = Object.keys(data).map(Number).sort((a,b)=>a-b);
+  return ages.reduce((prev, curr) => Math.abs(curr - ageM) < Math.abs(prev - ageM) ? curr : prev);
+}
+
+function getExactPercentile(val, pData) {
+  if (!pData) return null;
+  
+  const percentiles = [3,5,10,25,50,75,90,95,97];
+  const values = percentiles.map(p => pData['p'+p]);
+  
+  // Find bracketing percentiles
+  for (let i = 0; i < values.length - 1; i++) {
+    if (val >= values[i] && val <= values[i + 1]) {
+      // Linear interpolation
+      const lowP = percentiles[i];
+      const highP = percentiles[i + 1];
+      const lowV = values[i];
+      const highV = values[i + 1];
+      const interpolated = lowP + ((val - lowV) / (highV - lowV)) * (highP - lowP);
+      return Math.round(interpolated) + 'th';
+    }
+  }
+  
+  if (val < values[0]) return '<3rd';
+  if (val > values[values.length - 1]) return '>97th';
+  return '50th';
+}
+
+function checkGrowth(ageM, wt, ht, sex) {
+  if (!sex || !wt || wt <= 0) return null;
+  
+  const charts = SAUDI_GROWTH[sex];
+  if (!charts) return null;
+  
+  let res = {weight:null, height:null, bmi:null, alerts:[]};
+  
+  const wtChart = ageM <= 60 ? charts.wt_0_60 : charts.wt_5_19;
+  const closestWt = getClosestAge(ageM, wtChart);
+  const wtData = wtChart[closestWt];
+  
+  if (wtData) {
+    const perc = getExactPercentile(wt, wtData);
+    res.weight = {value:wt, percentile:perc};
+    
+    if (wt < wtData.p3) {
+      res.alerts.push({type:'danger', msg:`Weight <3rd percentile. Consider growth assessment.`});
+    } else if (wt > wtData.p97) {
+      res.alerts.push({type:'warning', msg:`Weight >97th percentile. Consider obesity screening if indicated.`});
+    } else if (perc.includes("50")) {
+      res.alerts.push({type:'success', msg:`Weight within normal range (${perc} percentile).`});
+    }
+  }
+  
+  if (ht && ht > 0) {
+    const htChart = ageM <= 60 ? charts.ht_0_60 : charts.ht_5_19;
+    const closestHt = getClosestAge(ageM, htChart);
+    const htData = htChart[closestHt];
+    
+    if (htData) {
+      const htPerc = getExactPercentile(ht, htData);
+      res.height = {value:ht, percentile:htPerc};
+      
+      if (ht < htData.p3) {
+        res.alerts.push({type:'danger', msg:`Height <3rd percentile. Consider evaluation.`});
+      } else if (ht > htData.p97) {
+        res.alerts.push({type:'info', msg:`Height >97th percentile (tall stature).`});
+      }
+      
+      const htM = ht / 100;
+      const bmi = wt / (htM * htM);
+      res.bmi = {
+        value: bmi.toFixed(1),
+        status: bmi < 18.5 ? "Underweight" : bmi < 25 ? "Normal" : bmi < 30 ? "Overweight" : "Obese"
+      };
+    }
+  }
+  
+  return res;
+}
+
+function roundSmart(x){
+  if(x===null||x===undefined||isNaN(x)) return "";
+  const n = Math.round(x*10)/10;
+  return (Math.abs(n) >= 10 || Number.isInteger(n)) ? String(n) : n.toFixed(1);
+}
+
+function roundToMeasurable(ml) {
+  if (ml < 1) return Math.round(ml * 4) / 4;
+  if (ml < 5) return Math.round(ml * 2) / 2;
+  return Math.round(ml);
+}
+
+function badge(status,label){
+  const cls = status==="good" ? "b-good" : status==="bad" ? "b-bad" : "b-warn";
+  return `<span class="badge ${cls}">${label}</span>`;
+}
+
+function clampMax(mg, maxMg){
+  if(!maxMg) return {mg, capped:false};
+  if(mg>maxMg) return {mg:maxMg, capped:true};
+  return {mg, capped:false};
+}
+
+function addToHistory(med, dose, ageM, wt) {
+  const entry = {
+    timestamp: Date.now(),
+    medId: med.id,
+    medName: med.shortName || med.name,
+    dose: dose.doseText,
+    ageMonths: ageM,
+    weight: wt
+  };
+  doseHistory.unshift(entry);
+  doseHistory = doseHistory.slice(0, 20);
+  localStorage.setItem('doseHistory', JSON.stringify(doseHistory));
+}
+
+function toggleFavorite(medId) {
+  const idx = favorites.indexOf(medId);
+  if (idx > -1) {
+    favorites.splice(idx, 1);
+  } else {
+    favorites.push(medId);
+  }
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+}
+
+function isFavorite(medId) {
+  return favorites.includes(medId);
+}
+
+function toggleCategory(cat) {
+  const idx = expandedCategories.indexOf(cat);
+  if (idx > -1) {
+    expandedCategories.splice(idx, 1);
+  } else {
+    expandedCategories.push(cat);
+  }
+  localStorage.setItem('expandedCategories', JSON.stringify(expandedCategories));
+}
+
+function isCategoryExpanded(cat) {
+  return expandedCategories.includes(cat);
+}
+
+function getStoredConcId(medId){
+  return localStorage.getItem("conc_"+medId) || "";
+}
+
+function setStoredConcId(medId, val){
+  localStorage.setItem("conc_"+medId, val);
+}
+
+function parseDoseMgRange(doseText){
+  if(!doseText) return null;
+  const t = String(doseText).replace(/,/g,"").trim();
+  if(!t.toLowerCase().includes("mg")) return null;
+
+  let m = t.match(/(\d+(\.\d+)?)\s*[–-]\s*(\d+(\.\d+)?)\s*mg/i);
+  if(m){
+    return {lo: Number(m[1]), hi: Number(m[3])};
+  }
+  m = t.match(/(\d+(\.\d+)?)\s*mg/i);
+  if(m){
+    const v = Number(m[1]);
+    return {lo: v, hi: v};
+  }
+  return null;
+}
+
+function mlFromMg(mg, mgPerMl){
+  if(!mgPerMl || mgPerMl<=0) return null;
+  return mg / mgPerMl;
+}
+
+function formatMlRange(range, mgPerMl){
+  const lo = mlFromMg(range.lo, mgPerMl);
+  const hi = mlFromMg(range.hi, mgPerMl);
+  if(lo===null || hi===null) return "";
+  
+  const r1 = roundToMeasurable(lo);
+  const r2 = roundToMeasurable(hi);
+  
+  if(Math.abs(r1-r2) < 1e-9) return `${r1} mL`;
+  return `${r1}–${r2} mL`;
+}
+
+function calcDose(med, ageM, wtKg, overrideText){
+  if(!wtKg || wtKg<=0){
+    return {status:"bad", label:"No weight", doseText:"—"};
+  }
+  if(wtKg>150){
+    return {status:"bad", label:"Invalid", doseText:"Weight too high"};
+  }
+
+  if(ageM < med.min_m || ageM > med.max_m){
+    return {status:"bad", label:"Not indicated", doseText:"Age not indicated"};
+  }
+
+  if(overrideText!=="" && overrideText!==null && !isNaN(Number(overrideText)) && Number(overrideText)>0){
+    const mg = Number(overrideText);
+    const capMsg = (med.max_mg && mg>med.max_mg) ? ` ⚠️ >max` : "";
+    return {status:"warn", label:"Override", doseText:`${roundSmart(mg)} mg${capMsg}`};
+  }
+
+  if(med.method==="fixed_text"){
+    return {status:"warn", label:"Reference", doseText: med.fixed || "—"};
+  }
+
+  if(med.method==="mgkg_single"){
+    let mg = med.mgkg * wtKg;
+    const {mg:mg2, capped} = clampMax(mg, med.max_mg);
+    mg = mg2;
+    return capped
+      ? {status:"warn", label:"Max", doseText:`${roundSmart(mg)} mg (max)`}
+      : {status:"good", label:"✓", doseText:`${roundSmart(mg)} mg`};
+  }
+
+  if(med.method==="mgkg_range"){
+    let lo = med.mgkg_low * wtKg;
+    let hi = med.mgkg_high * wtKg;
+    if(med.max_mg){
+      lo = Math.min(lo, med.max_mg);
+      hi = Math.min(hi, med.max_mg);
+    }
+    return {status:"good", label:"✓", doseText:`${roundSmart(lo)}–${roundSmart(hi)} mg`};
+  }
+
+  if(med.method==="azithro_3day"){
+    const daily = clampMax(10*wtKg, med.max_mg).mg;
+    return {status:"good", label:"✓", doseText:`${roundSmart(daily)} mg daily x3 days`};
+  }
+
+  if(med.method==="salb_neb_weight"){
+    let mg = 0.15 * wtKg;
+    mg = Math.max(mg, 2.5);
+    mg = Math.min(mg, 5);
+    return {status:"good", label:"✓", doseText:`${roundSmart(mg)} mg`};
+  }
+
+  if(med.method==="salb_mdi_age"){
+    if(ageM < 24) return {status:"warn", label:"Ref", doseText:"2-4 puffs with spacer"};
+    if(ageM < 72) return {status:"warn", label:"Ref", doseText:"2-6 puffs with spacer"};
+    return {status:"warn", label:"Ref", doseText:"4-6 puffs with spacer"};
+  }
+
+  if(med.method==="ipra_neb_age"){
+    return {status:"warn", label:"Ref", doseText: ageM < 72 ? "250 mcg" : "500 mcg"};
+  }
+
+  if(med.method==="montelukast_age"){
+    if(ageM>=6 && ageM<=23) return {status:"good", label:"✓", doseText:"4 mg"};
+    if(ageM>=24 && ageM<=71) return {status:"good", label:"✓", doseText:"4 mg"};
+    if(ageM>=72 && ageM<=168) return {status:"good", label:"✓", doseText:"5 mg"};
+    return {status:"good", label:"✓", doseText:"10 mg"};
+  }
+
+  if(med.method==="cetirizine_age"){
+    if(ageM>=6 && ageM<=23) return {status:"good", label:"✓", doseText:"2.5 mg"};
+    if(ageM>=24 && ageM<=71) return {status:"good", label:"✓", doseText:"2.5–5 mg"};
+    if(ageM>=72 && ageM<=143) return {status:"good", label:"✓", doseText:"5–10 mg"};
+    return {status:"good", label:"✓", doseText:"10 mg"};
+  }
+
+  if(med.method==="loratadine_age"){
+    if(ageM>=24 && ageM<=71) return {status:"good", label:"✓", doseText:"5 mg"};
+    return {status:"good", label:"✓", doseText:"10 mg"};
+  }
+
+  if(med.method==="chlorphen_weight"){
+    let mg = 0.1 * wtKg;
+    mg = Math.min(mg, 4);
+    return {status:"warn", label:"Caution", doseText:`${roundSmart(mg)} mg`};
+  }
+
+  if(med.method==="ondansetron_AGE_weight"){
+    if(wtKg < 8) return {status:"warn", label:"Caution", doseText:"0.15 mg/kg (max 8 mg)"};
+    if(wtKg>=8 && wtKg<=15) return {status:"good", label:"✓", doseText:"2 mg"};
+    if(wtKg>15 && wtKg<=30) return {status:"good", label:"✓", doseText:"4 mg"};
+    return {status:"good", label:"✓", doseText:"8 mg"};
+  }
+
+  if(med.method==="omeprazole_mgkg"){
+    let mg = 1.0 * wtKg;
+    mg = Math.min(mg, 40);
+    return {status:"warn", label:"Ref", doseText:`${roundSmart(mg)} mg`};
+  }
+
+  if(med.method==="lactulose_age"){
+    if(ageM>=6 && ageM<=35) return {status:"warn", label:"Ref", doseText:"5–10 mL daily"};
+    if(ageM>=36 && ageM<=71) return {status:"warn", label:"Ref", doseText:"10–15 mL daily"};
+    if(ageM>=72 && ageM<=143) return {status:"warn", label:"Ref", doseText:"15–30 mL daily"};
+    return {status:"warn", label:"Ref", doseText:"15–30 mL daily"};
+  }
+
+  if(med.method==="diclo_mgkg"){
+    const lo = Math.min(1.5*wtKg, 150);
+    const hi = Math.min(2.5*wtKg, 150);
+    return {status:"warn", label:"Ref", doseText:`${roundSmart(lo)}–${roundSmart(hi)} mg/day divided`};
+  }
+
+  if(med.method==="epi_mgkg"){
+    let mg = 0.01 * wtKg;
+    mg = Math.min(mg, 0.5);
+    return {status:"good", label:"✓", doseText:`${roundSmart(mg)} mg (= ${roundSmart(mg)} mL of 1:1000)`};
+  }
+
+  if(med.method==="pred_mgkg"){
+    let mg = 1.0 * wtKg;
+    mg = Math.min(mg, 40);
+    return {status:"warn", label:"Ref", doseText:`${roundSmart(mg)} mg (1 mg/kg)`};
+  }
+
+  if(med.method==="dex_croup"){
+    const lo = Math.min(0.15*wtKg, 10);
+    const hi = Math.min(0.6*wtKg, 10);
+    return {status:"warn", label:"Ref", doseText:`${roundSmart(lo)}–${roundSmart(hi)} mg`};
+  }
+
+
+  // Domperidone GERD dosing
+  if(med.method==="domperidone_gerd"){
+    if(ageM < 144) {
+      const low_mcg = 250 * wtKg;
+      const high_mcg = 400 * wtKg;
+      const low_mg = Math.min(low_mcg / 1000, 10);
+      const high_mg = Math.min(high_mcg / 1000, 20);
+      return {status:"warn", label:"GERD", doseText:`${roundSmart(low_mg)}–${roundSmart(high_mg)} mg TID`};
+    } else if(wtKg >= 35) {
+      return {status:"warn", label:"Ref", doseText:"10 mg TID (max 1 week)"};
+    }
+    return {status:"bad", label:"Not indicated", doseText:"Age/weight restrictions"};
+  }
+
+  // Diclofenac suppository postoperative
+  if(med.method==="diclo_supp_postop"){
+    if(wtKg >= 8 && wtKg <= 11) {
+      return {status:"warn", label:"Postop", doseText:"12.5 mg BID (max 4 days)"};
+    } else if(wtKg >= 12) {
+      const mg = Math.min(1 * wtKg, 50);
+      return {status:"warn", label:"Postop", doseText:`${roundSmart(mg)} mg TID (max 4 days)`};
+    }
+    return {status:"bad", label:"Weight <8kg", doseText:"Not indicated"};
+  }
+
+  // Iron elemental dosing
+  if(med.method==="iron_elemental_mgkg"){
+    const treatment_low = 3 * wtKg;
+    const treatment_high = 6 * wtKg;
+    const prevention_low = 1 * wtKg;
+    const prevention_high = 2 * wtKg;
+    return {status:"good", label:"✓", 
+      doseText:`Treatment: ${roundSmart(treatment_low)}–${roundSmart(treatment_high)} mg/day • Prevention: ${roundSmart(prevention_low)}–${roundSmart(prevention_high)} mg/day`};
+  }
+
+    return {status:"warn", label:"Ref", doseText:"—"};
+}
+
+function formatAgeSummary(y,m,ageM,wt){
+  let s = `${y}y`;
+  if(m>0) s += ` ${m}m`;
+  s += ` (${ageM}mo)`;
+  if(wt>0) s += ` • ${wt.toFixed(1)} kg`;
+  return s;
+}
+
+function showGrowthAlerts(ageM, wt, ht, sex) {
+  const container = document.getElementById("growthAlert");
+  const summaryContainer = document.getElementById("growthSummary");
+  const sexSelect = document.getElementById("sex");
+  const ageSummary = document.getElementById("ageSummary");
+  
+  sexSelect.classList.remove('male-selected', 'female-selected');
+  if (sex === 'male') {
+    sexSelect.classList.add('male-selected');
+  } else if (sex === 'female') {
+    sexSelect.classList.add('female-selected');
+  }
+  
+  ageSummary.classList.remove('male-theme', 'female-theme');
+  if (sex === 'male') {
+    ageSummary.classList.add('male-theme');
+  } else if (sex === 'female') {
+    ageSummary.classList.add('female-theme');
+  }
+  
+  if (!sex || !wt || wt <= 0) {
+    container.innerHTML = "";
+    summaryContainer.innerHTML = "";
+    return;
+  }
+  
+  const growth = checkGrowth(ageM, wt, ht, sex);
+  
+  if (!growth) {
+    container.innerHTML = "";
+    summaryContainer.innerHTML = "";
+    return;
+  }
+  
+  let alertsHtml = "";
+  growth.alerts.forEach(alert => {
+    const boxClass = alert.type === 'danger' ? 'alert-box' : 
+                     alert.type === 'warning' ? 'warning-box' :
+                     alert.type === 'success' ? 'success-box' : 'info-box';
+    const icon = sex === 'male' ? '👦' : '👧';
+    alertsHtml += `<div class="${boxClass}">
+      <span style="font-size:24px">${icon}</span>
+      <div><strong>Saudi Growth Charts:</strong> ${alert.msg}</div>
+    </div>`;
+  });
+  container.innerHTML = alertsHtml;
+  
+  let summaryParts = [];
+  if (growth.weight) {
+    summaryParts.push(`Weight: <strong>${growth.weight.percentile} percentile</strong>`);
+  }
+  if (growth.height) {
+    summaryParts.push(`Height: <strong>${growth.height.percentile} percentile</strong>`);
+  }
+  if (growth.bmi) {
+    summaryParts.push(`BMI: <strong>${growth.bmi.value} (${growth.bmi.status})</strong>`);
+  }
+  
+  if (summaryParts.length > 0) {
+    const icon = sex === 'male' ? '👦' : '👧';
+    summaryContainer.innerHTML = `
+      <div class="growth-summary">
+        <strong>${icon} Growth Parameters (Saudi Charts 2005):</strong><br>
+        ${summaryParts.join(' • ')}
+      </div>
+    `;
+  } else {
+    summaryContainer.innerHTML = "";
+  }
+}
+
+function render(){
+  const y = Number(document.getElementById("ageYears").value||0);
+  const m = Number(document.getElementById("ageMonths").value||0);
+  const wt = Number(document.getElementById("weight").value||0);
+  const ht = Number(document.getElementById("height").value||0);
+  const sex = document.getElementById("sex").value;
+  const ageM = y*12 + m;
+  
+  document.getElementById("ageSummary").textContent = formatAgeSummary(y,m,ageM,wt);
+  showGrowthAlerts(ageM, wt, ht, sex);
+
+  const q = (document.getElementById("searchBox").value||"").trim().toLowerCase();
+
+  const container = document.getElementById("categoriesContainer");
+  container.innerHTML = "";
+
+  CATEGORIES.forEach(cat => {
+    let catMeds = MEDS.filter(med => med.cat === cat);
+    
+    if (q) {
+      catMeds = catMeds.filter(med=>{
+        const hay = [
+          med.name, med.shortName, med.cat, (med.indications||""), 
+          (med.common||[]).join(" "), (med.notes||"")
+        ].join(" ").toLowerCase();
+        return hay.includes(q);
+      });
+    }
+
+    if (catMeds.length === 0) return;
+
+    const section = document.createElement("div");
+    section.className = "category-section";
+
+    const isExpanded = isCategoryExpanded(cat);
+    
+    const header = document.createElement("div");
+    header.className = "category-header" + (isExpanded ? " expanded" : "");
+    
+    const catIcon = CATEGORY_ICONS[cat] || "💊";
+    
+    header.innerHTML = `
+      <div class="category-title">
+        <div class="category-icon-badge">${catIcon}</div>
+        <span>${cat}</span>
+        <span class="category-count">${catMeds.length}</span>
+      </div>
+      <span class="category-expand-icon">▼</span>
+    `;
+    
+    header.addEventListener('click', () => {
+      toggleCategory(cat);
+      render();
+    });
+
+    const content = document.createElement("div");
+    content.className = "category-content" + (isExpanded ? " expanded" : "");
+
+    catMeds.forEach(med => {
+      const overrideKey = "ov_" + med.id;
+      const overrideVal = localStorage.getItem(overrideKey) ?? "";
+      const res = calcDose(med, ageM, wt, overrideVal);
+
+      const card = document.createElement("div");
+      card.className="med-card";
+      card.dataset.medId = med.id;
+
+      const concList = med.concentrations || [];
+      let selectedConcKey = "";
+      let mlCompact = "";
+      let concHtml = "";
+      let mlExpanded = "";
+      let mlCalculator = "";
+
+      if(concList.length){
+        selectedConcKey = getStoredConcId(med.id) || (concList[0].label || "0");
+        if(!concList.some(c => (c.label||"0") === selectedConcKey)){
+          selectedConcKey = concList[0].label || "0";
+          setStoredConcId(med.id, selectedConcKey);
+        }
+
+        const selected = concList.find(c => (c.label||"0") === selectedConcKey) || concList[0];
+
+        if(selected && typeof selected.mg_per_ml === "number"){
+          const mgRange = parseDoseMgRange(res.doseText);
+          if(mgRange){
+            const mlText = formatMlRange(mgRange, selected.mg_per_ml);
+            if(mlText) {
+              mlCompact = `<div class="ml-compact">📏 ${mlText}</div>`;
+              mlExpanded = `<div class="ml-display">📏 Volume: ${mlText}</div>`;
+              
+              const exact = mlFromMg((mgRange.lo + mgRange.hi)/2, selected.mg_per_ml);
+              const rounded = roundToMeasurable(exact);
+              mlCalculator = `
+                <div class="ml-calculator">
+                  <strong>💡 Rounding:</strong> ${exact?.toFixed(2)} mL → ${rounded} mL<br>
+                  <small>${((mgRange.lo + mgRange.hi)/2).toFixed(1)} mg ÷ ${selected.mg_per_ml} mg/mL</small>
+                </div>
+              `;
+            }
+          }
+        }
+
+        if(concList.length > 1) {
+          concHtml = `
+            <div class="section-title">Concentration</div>
+            <select class="conc-select" data-conc-id="${med.id}">
+              ${concList.map(c=>{
+                const key = c.label || "0";
+                const sel = key===selectedConcKey ? "selected" : "";
+                return `<option value="${key}" ${sel}>${key}</option>`;
+              }).join("")}
+            </select>
+          `;
+        } else if(concList.length === 1) {
+          concHtml = `<div class="chip" style="margin-top:8px">${concList[0].label}</div>`;
+        }
+      }
+
+      const favIcon = isFavorite(med.id) ? "⭐" : "☆";
+      const displayName = med.shortName || med.name;
+      
+      const compactHtml = `
+        <div class="med-header">
+          <div class="med-name">${displayName}</div>
+          <div style="display:flex;gap:10px;align-items:center">
+            ${badge(res.status, res.label)}
+            <span class="favorite-btn" data-med-id="${med.id}">${favIcon}</span>
+          </div>
+        </div>
+        <div class="dose-compact">${res.doseText}</div>
+        ${mlCompact}
+        <div class="freq-compact">${med.freq || "—"}</div>
+        <div class="expand-hint">Tap for full details ▼</div>
+      `;
+
+      let dailyMaxHtml = "";
+      if(med.maxDailyMgKg && wt > 0) {
+        const maxDaily = med.maxDailyMgKg * wt;
+        dailyMaxHtml = `
+          <div class="warning-box">
+            <span style="font-size:20px">⚠️</span>
+            <div><strong>Max Daily:</strong> ${roundSmart(maxDaily)} mg/day (${med.maxDailyMgKg} mg/kg/day)</div>
+          </div>
+        `;
+      }
+
+      const expandedHtml = `
+        <div class="med-name-full">${med.name}</div>
+        
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          ${badge(res.status, res.label)}
+          <span class="favorite-btn" data-med-id="${med.id}">${favIcon}</span>
+        </div>
+
+        <div class="dose-display">${res.doseText}</div>
+        ${mlExpanded}
+        ${mlCalculator}
+        <div class="freq">${med.freq || "—"}</div>
+
+        ${dailyMaxHtml}
+
+        ${concHtml}
+
+        <div class="section-title">Manual Override (mg)</div>
+        <input class="override-input" inputmode="decimal" placeholder="Leave empty for auto-calculation"
+          value="${overrideVal}" data-med-id="${med.id}" />
+        <div class="small">Saved on this device only</div>
+
+        ${med.clinicalTips ? `
+          <div class="info-box" style="margin-top:14px">
+            <span style="font-size:20px">💡</span>
+            <div><strong>Clinical Tip:</strong> ${med.clinicalTips}</div>
+          </div>
+        ` : ""}
+
+        <details>
+          <summary>📋 Indication & Contraindications</summary>
+          <div class="note">
+            <strong>Indication:</strong> ${med.indications || "—"}<br><br>
+            <strong>Contraindications:</strong> ${med.contraindications || "—"}
+          </div>
+        </details>
+
+        ${med.sideEffects ? `
+          <details>
+            <summary>⚠️ Side Effects</summary>
+            <div class="note">${med.sideEffects}</div>
+          </details>
+        ` : ""}
+
+        <details>
+          <summary>🧮 mL Calculation Formula</summary>
+          <div class="note">
+            <strong>mL = Dose (mg) ÷ Concentration (mg/mL)</strong><br>
+            Example: 200 mg needed, syrup 20 mg/mL → 200 ÷ 20 = 10 mL<br>
+            Round to measurable volume on your syringe.
+          </div>
+        </details>
+
+        <div class="quick-actions">
+          <button class="btn btn-small add-history-btn" data-med-id="${med.id}">📋 Add to History</button>
+        </div>
+
+        <button class="btn collapse-btn">▲ Collapse</button>
+      `;
+
+      card.innerHTML = `
+        <div class="med-compact">${compactHtml}</div>
+        <div class="med-expanded">${expandedHtml}</div>
+      `;
+
+      card.addEventListener("click", (e)=>{
+        if(e.target.closest('.favorite-btn') || 
+           e.target.closest('.add-history-btn') ||
+           e.target.closest('.override-input') ||
+           e.target.closest('.conc-select') ||
+           e.target.closest('.collapse-btn') ||
+           e.target.closest('details')) {
+          return;
+        }
+        
+        if(!card.classList.contains('expanded')) {
+          card.classList.add('expanded');
+        }
+      });
+
+      const collapseBtn = card.querySelector('.collapse-btn');
+      collapseBtn?.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        card.classList.remove('expanded');
+        card.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+      });
+
+      card.querySelectorAll('.favorite-btn').forEach(btn=>{
+        btn.addEventListener('click', (e)=>{
+          e.stopPropagation();
+          const id = btn.getAttribute('data-med-id');
+          toggleFavorite(id);
+          render();
+        });
+      });
+
+      const input = card.querySelector('.override-input');
+      input?.addEventListener('input', (e)=>{
+        localStorage.setItem(overrideKey, e.target.value);
+        render();
+      });
+
+      const histBtn = card.querySelector('.add-history-btn');
+      histBtn?.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        const id = e.target.getAttribute('data-med-id');
+        const m = MEDS.find(x => x.id === id);
+        if(m && res.doseText !== "—") {
+          addToHistory(m, res, ageM, wt);
+          e.target.textContent = "✓ Added";
+          setTimeout(()=>{ e.target.textContent = "📋 Add to History"; }, 2000);
+        }
+      });
+
+      const concSel = card.querySelector('.conc-select');
+      concSel?.addEventListener('change', (e)=>{
+        e.stopPropagation();
+        const medId = e.target.getAttribute('data-conc-id');
+        setStoredConcId(medId, e.target.value);
+        render();
+      });
+
+      content.appendChild(card);
+    });
+
+    section.appendChild(header);
+    section.appendChild(content);
+    container.appendChild(section);
+  });
+}
+
+function showHistory() {
+  const modal = document.getElementById("historyModal");
+  const content = document.getElementById("historyContent");
+  
+  if(doseHistory.length === 0) {
+    content.innerHTML = '<div class="info-box"><span style="font-size:48px">📋</span><div><strong>No calculations yet.</strong><br>Add calculations to your history to see them here.</div></div>';
+  } else {
+    content.innerHTML = doseHistory.map(entry => {
+      const date = new Date(entry.timestamp);
+      return `
+        <div class="history-item">
+          <strong>${entry.medName}</strong><br>
+          ${entry.dose} • ${entry.ageMonths}mo • ${entry.weight}kg<br>
+          <span class="history-time">${date.toLocaleString()}</span>
+        </div>
+      `;
+    }).join('');
+  }
+  
+  modal.classList.add('active');
+}
+
+function showFavorites() {
+  const modal = document.getElementById("favoritesModal");
+  const content = document.getElementById("favoritesContent");
+  
+  if(favorites.length === 0) {
+    content.innerHTML = '<div class="info-box"><span style="font-size:48px">⭐</span><div><strong>No favorites yet.</strong><br>Tap the ☆ icon on medications to add them here.</div></div>';
+  } else {
+    const favMeds = MEDS.filter(m => favorites.includes(m.id));
+    content.innerHTML = favMeds.map(med => `
+      <div class="history-item" style="cursor:pointer" onclick="document.getElementById('searchBox').value='${med.shortName||med.name}';document.getElementById('closeFavorites').click();render()">
+        <strong>${med.shortName || med.name}</strong><br>
+        <small>${med.cat}</small>
+      </div>
+    `).join('');
+  }
+  
+  modal.classList.add('active');
+}
+
+document.getElementById("ageYears").addEventListener("input", render);
+document.getElementById("ageMonths").addEventListener("input", render);
+document.getElementById("weight").addEventListener("input", render);
+document.getElementById("height").addEventListener("input", render);
+document.getElementById("sex").addEventListener("change", render);
+document.getElementById("searchBox").addEventListener("input", render);
+
+document.getElementById("historyBtn").addEventListener("click", showHistory);
+document.getElementById("favoritesBtn").addEventListener("click", showFavorites);
+
+document.getElementById("closeHistory").addEventListener("click", ()=>{
+  document.getElementById("historyModal").classList.remove('active');
+});
+
+document.getElementById("closeFavorites").addEventListener("click", ()=>{
+  document.getElementById("favoritesModal").classList.remove('active');
+});
+
+document.getElementById("clearHistory").addEventListener("click", ()=>{
+  if(confirm("Clear all history?")) {
+    doseHistory = [];
+    localStorage.setItem('doseHistory', '[]');
+    showHistory();
+  }
+});
+
+document.querySelectorAll('.modal').forEach(modal => {
+  modal.addEventListener('click', (e) => {
+    if(e.target === modal) modal.classList.remove('active');
+  });
+});
+
+render();
+</script>
+</body>
+</html>
