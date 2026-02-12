@@ -1,0 +1,32 @@
+{
+  "name": "PHC Pediatric Dose & Formulary",
+  "short_name": "PHC Peds",
+  "description": "Pediatric dosing calculator with Saudi Growth Charts & Wasfaty formulary – offline PWA for healthcare professionals",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0a0f1e",
+  "theme_color": "#0a0f1e",
+  "orientation": "portrait-primary",
+  "scope": "./",
+  "categories": ["medical", "health"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect fill='%230a0f1e' width='512' height='512' rx='96'/%3E%3Crect x='56' y='56' width='400' height='400' rx='72' fill='%23141d35' stroke='%234da3ff' stroke-width='4'/%3E%3Ctext x='256' y='220' font-size='120' text-anchor='middle' fill='%234da3ff' font-family='system-ui' font-weight='900'%3E%F0%9F%8F%A5%3C/text%3E%3Ctext x='256' y='340' font-size='64' text-anchor='middle' fill='%23e8f0ff' font-family='system-ui' font-weight='800'%3EPHC%3C/text%3E%3Ctext x='256' y='400' font-size='36' text-anchor='middle' fill='%236b7a9a' font-family='system-ui' font-weight='600'%3EPEDS%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect fill='%230a0f1e' width='192' height='192' rx='38'/%3E%3Ctext x='96' y='90' font-size='56' text-anchor='middle' fill='%234da3ff'%3E%F0%9F%8F%A5%3C/text%3E%3Ctext x='96' y='140' font-size='32' text-anchor='middle' fill='%23e8f0ff' font-family='system-ui' font-weight='800'%3EPHC%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect fill='%234da3ff' width='512' height='512'/%3E%3Ctext x='256' y='220' font-size='120' text-anchor='middle' fill='white'%3E%F0%9F%8F%A5%3C/text%3E%3Ctext x='256' y='340' font-size='80' text-anchor='middle' fill='white' font-family='system-ui' font-weight='900'%3EPHC%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
